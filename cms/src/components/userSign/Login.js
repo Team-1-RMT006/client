@@ -1,6 +1,15 @@
 import {Link} from 'react-router-dom'
+import {useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 
-function Login () { 
+function Login ({loggedIn}) {
+  const history = useHistory();
+  useEffect(()=>{
+    if(loggedIn){
+      history.push('/');
+    }
+  }, [loggedIn, history]);
+ 
   return ( 
     <div className="w-4/5 h-screen bg-gray-900 flex items-center justify-center px-5 py-5">
       <div className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style={{maxWidth: 1000}}>
@@ -13,18 +22,22 @@ function Login () {
             <div>
               <div className="flex -mx-3">
                 <div className="w-full px-3 mb-3 mt-10">
-                  <label for="" className="text-xs font-semibold px-1">Email</label>
+                  <label htmlFor="" className="text-xs font-semibold px-1">Email</label>
                   <div className="flex">
-                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
+                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
                     <input type="email" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="john@example.com" />
                   </div>
                 </div>
               </div>
               <div className="flex -mx-3">
                 <div className="w-full px-3 mb-3 mt-5 mb-10">
-                  <label for="" className="text-xs font-semibold px-1">Password</label>
+                  <label htmlFor="" className="text-xs font-semibold px-1">Password</label>
                   <div className="flex">
-                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-lock-outline text-gray-400 text-lg"></i></div>
+                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
                     <input type="password" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="************" />
                   </div>
                 </div>
