@@ -2,7 +2,6 @@ import {useHistory} from 'react-router-dom';
 
 function TableBody({event, handleEditForm, handleDelete}) {
   const history = useHistory();
-  console.log(history);
   function handleDetail(){
     history.push(`/detail/${event.id}`)
   }

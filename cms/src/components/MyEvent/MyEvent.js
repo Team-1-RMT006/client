@@ -114,22 +114,6 @@ function MyEvent ({loggedIn}) {
               className="bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
               onClick={(e)=>{
                 e.preventDefault();
-                handleCreateForm();
-              }}
-              >
-              <span className="mr-2">Create New Event</span>
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div className="flex">
-          <div className="m-3">
-            <button 
-              className="bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
-              onClick={(e)=>{
-                e.preventDefault();
                 handleSelectedEvents('Ongoing')
               }}
               >
@@ -164,6 +148,22 @@ function MyEvent ({loggedIn}) {
               <span className="mr-2">Canceled</span>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div className="flex">
+          <div className="m-3">
+            <button 
+              className="bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+              onClick={(e)=>{
+                e.preventDefault();
+                handleCreateForm();
+              }}
+              >
+              <span className="mr-2">Create New Event</span>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </button>
           </div>

@@ -16,7 +16,7 @@ function Dashboard ({loggedIn}) {
   }
   return (
     <div className="flex flex-col h-screen w-4/5 bg-gray-900">
-      <div className="flex justify-center">
+      <div className="flex justify-end">
         <div className="m-3">
           <button 
             className="bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"

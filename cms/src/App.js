@@ -1,5 +1,4 @@
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom';
@@ -9,6 +8,8 @@ import Login from './components/userSign/Login';
 import Register from './components/userSign/Register';
 import EventDetail from './components/Details/EventDetail';
 import MyEvent from './components/MyEvent/MyEvent';
+import Banner from './components/Banner/Banner';
+
 import {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/event/:id">
             <MyEvent loggedIn={loggedIn} />
+          </Route>
+          <Route exact path="/banner">
+            <Banner loggedIn={loggedIn} />
           </Route>
           <Route exact path="/login">
             <Login loggedIn={loggedIn} />
