@@ -3,8 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col, CardDeck } from 'react-bootstrap'
 import NavbarMenu from '../component/NavbarMenu'
 import CardEvent from '../component/CardEvent'
+import { useSelector } from 'react-redux'
 
 export default function Wishlist() {
+  const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
+  
   return (
     <Container fluid>
       <NavbarMenu />
@@ -15,7 +18,9 @@ export default function Wishlist() {
         <Row>
           <CardDeck style={{ margin: '0px 24px' }}>
             <Col lg={6} className='p-3'>
-              <CardEvent />
+              { wishlists.map(wishlist => {
+                return <CardEvent data={wishlist} key={wishlist.id} />
+              })}
             </Col>
           </CardDeck>
         </Row>

@@ -6,14 +6,17 @@ import CardEvent from '../component/CardEvent'
 import FooterPage from '../component/FooterPage'
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchEvent} from '../store/action/eventAction'
+import {fetchWishlist} from '../store/action/wishlistAction'
 
 export default function Mainpage() {
   const events = useSelector(state => state.eventReducer.events)
+  const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchEvent())
+    dispatch(fetchWishlist())
   }, [])
 
   return (
