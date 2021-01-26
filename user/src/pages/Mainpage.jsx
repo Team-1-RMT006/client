@@ -1,23 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, CardDeck, Col } from 'react-bootstrap'
-import NavbarMenu from '../component/NavbarMenu'
 import Jumbotron from '../component/Jumbotron'
 import CardEvent from '../component/CardEvent'
 import FooterPage from '../component/FooterPage'
-import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import {fetchEvent} from '../store/action/eventAction'
+import {fetchWishlist} from '../store/action/wishlistAction'
 
 export default function Mainpage() {
+  const events = useSelector(state => state.eventReducer.events)
+  const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
+
+  const dispatch = useDispatch()
+  
+  export default function Mainpage() {
   const history = useHistory()
+  
   useEffect(() => {
     if(!localStorage.getItem("access_token")) {
       history.push("/login")
     }
   })
 
+  useEffect(() => {
+    dispatch(fetchEvent())
+    dispatch(fetchWishlist())
+  }, [])
+
   return (
     <Container fluid>
-      <NavbarMenu />
       <Jumbotron />
       <hr /><br />
       <div
@@ -36,15 +49,9 @@ export default function Mainpage() {
         </div>
         <Row>
           <CardDeck style={{ margin: '0px 17px' }}>
-            <Col lg={6} className='p-3'>
-              <CardEvent />
-            </Col>
-            <Col lg={6} className='p-3'>
-              <CardEvent />
-            </Col>
-            <Col lg={6} className='p-3'>
-              <CardEvent />
-            </Col>
+            { events.map(event => {
+              return <CardEvent data={event} key={event.id} />
+            })}
           </CardDeck>
         </Row>
       </div>

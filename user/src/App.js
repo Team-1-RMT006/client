@@ -3,6 +3,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { Login, Register, Wishlist, History, DetailEvent, Mainpage } from './pages/Index'
 import store from './store'
+import NavbarMenu from './component/NavbarMenu'
 
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
+      <NavbarMenu />
       <Switch>
         <Route exact path='/'>
           <Mainpage />

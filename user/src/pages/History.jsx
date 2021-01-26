@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Nav, Navbar, DropdownButton, Dropdown, Form, Row, Col, Card, CardDeck } from 'react-bootstrap'
 import NavbarMenu from '../component/NavbarMenu'
 import CardEvent from '../component/CardEvent'
+import { useSelector } from 'react-redux';
+import { fetchTickets } from '../store/action/ticketAction'
 
-export default function Wishlist() {
+
+export default function History() {
+  const tickets = useSelector(state => state.ticketReducer.tickets);
+  const ticketsIsLoading = useSelector(state => state.ticketReducer.ticketsIsLoading);
+  const ticketsError = useSelector(state => state.ticketReducer.ticketsError);
+
+  useEffect(() => {
+    fetchTickets()
+  })
+
+  if (ticketsIsLoading) {
+    return <h1>Loading ... </h1>
+  }
+
   return (
     <Container fluid>
       <NavbarMenu />
@@ -19,15 +34,7 @@ export default function Wishlist() {
 
         <Row>
           <CardDeck style={{ margin: '0px 17px' }}>
-            <Col lg={6} className='p-3'>
-              <CardEvent />
-            </Col>
-            <Col lg={6} className='p-3'>
-              <CardEvent />
-            </Col>
-            <Col lg={6} className='p-3'>
-              <CardEvent />
-            </Col>
+            {tickets.map(ticket => <Col lg={6} className='p-3'><CardEvent data={ticket} key={ticket.id}/></Col>)}
           </CardDeck>
         </Row>
       </div>
