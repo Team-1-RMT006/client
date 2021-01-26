@@ -1,52 +1,50 @@
 import axios from 'axios'
+// import { useHistory } from 'react-router-dom'
+import Swal from 'sweetalert2'
 const url = 'http://localhost:4000/customer'
+// const history = useHistory()
 
-// export const userLogin = () => {
-//   return (dispatch, getState) => {
-//     axios({
-//       method: 'post',
-//       url,
-//       data: {
-//         email,
-//         password
-//       }
-//     })
-//     .then(res => (
-//         res.json()
-//       ))
-//       .then(data => {
-//         dispatch({
-//           type: 'LOGIN',
-//           payload: data
-//         })
-//       })
-//       .catch(err => {
-//         console.log(err);
-//       })
-//       .finally(() => {
-//         dispatch({
-//           type: 'LOADING',
-//           payload: false
-//         })
-//       })
-//   }
-// }
 
-export const userRegister = (payload) => {
+export const userLogin = (payload) => {
   return (dispatch, getState) => {
-    console.log(payload)
-    axios({
-      method: 'post',
-      url: url + '/register',
+    // console.log(payload, "--------");
+    return axios({
+      method: 'POST',
+      url: url + "/login",
       data: {
-        firstName: payload.firstName,
-        lastName: payload.lastName,
         email: payload.email,
         password: payload.password
       }
     })
-    .then(() => console.log('berhasil'))
-    .catch(err => console.log(err))
+      
+  }
+}
+
+export const userRegister = (payload) => {
+  return (dispatch, getState) => {
+    // console.log(payload, "ini di user")
+    axios({
+      method: 'POST',
+      url: url + '/register',
+      data: {
+        first_name: payload.firstName,
+        last_name: payload.lastName,
+        email: payload.email,
+        password: payload.password
+      }
+    })
+      .then((_) => {
+        Swal.fire('Success to Register')
+        // console.log("berhasil")
+        dispatch({
+          type: "SET_GO_TO_LOGIN",
+          data: true
+        })
+      })
+      .catch(err => {
+        console.log("--------")
+        console.log(err.response.data.message)
+      })
   }
 }
 

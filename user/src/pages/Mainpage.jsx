@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, CardDeck, Col } from 'react-bootstrap'
 import Jumbotron from '../component/Jumbotron'
@@ -13,6 +14,15 @@ export default function Mainpage() {
   const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
 
   const dispatch = useDispatch()
+  
+  export default function Mainpage() {
+  const history = useHistory()
+  
+  useEffect(() => {
+    if(!localStorage.getItem("access_token")) {
+      history.push("/login")
+    }
+  })
 
   useEffect(() => {
     dispatch(fetchEvent())

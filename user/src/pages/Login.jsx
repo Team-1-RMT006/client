@@ -1,23 +1,37 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { userLogin } from "../store/action/user"
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
+  const history = useHistory()
+
+  //ketika ada acces token di local nstorage dia langsung arahin ke main page. dengan bisa oakai local storage.
+  // tapi ketika ga ada lovbaklb SVGAnimateTransformElement.s ,apanm n  sdia bnalik ke ? loghl
+
 
   const submitHandler = e => {
     e.preventDefault()
     // console.log(email.target.value, password.target.value)
-    dispatch({
-      type: 'LOGIN',
-      payload: {
-        email,
-        password
-      }
+    // alert(password.target.value)
+    const inputData = {
+      email: email.target.value,
+      password: password.target.value
+    }
+    dispatch(userLogin(inputData))
+    .then(res => (
+      localStorage.setItem("access_token", res.data.access_token),
+      history.push("/")
+    ))
+    .catch(err => {
+      // console.log(err);
+      console.log("--------")
+      console.log(err.response.data.message)
     })
   }
 
@@ -50,11 +64,11 @@ export default function Login() {
             <Form onSubmit={submitHandler}>
               <Form.Group controlId='email'>
                 <Form.Label><strong>Email</strong></Form.Label>
-                <Form.Control onChange={(value) => setEmail(value)} type='email' placeholder={email} />
+                <Form.Control onChange={(value) => setEmail(value)} type='email'/>
               </Form.Group>
               <Form.Group controlId='password'>
                 <Form.Label><strong>Password</strong></Form.Label>
-                <Form.Control onChange={(value) => setPassword(value)} type='password' placeholder={password} />
+                <Form.Control onChange={(value) => setPassword(value)} type='password'/>
               </Form.Group>
               <br />
               <Button
