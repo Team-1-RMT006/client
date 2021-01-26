@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, Card, Button } from 'react-bootstrap'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addWishlist } from '../store/action/wishlistAction'
+import { addWishlist, removeWishlist } from '../store/action/wishlistAction'
 
 export default function CardEvent(props) {
   const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
@@ -25,6 +25,10 @@ export default function CardEvent(props) {
 
   function handleAddWishlist() {
     dispatch(addWishlist(props.data.event.id))
+  }
+
+  function handleRemoveWishlist() {
+    dispatch(removeWishlist(props.data.event.id))
   }
 
   return (
@@ -51,7 +55,7 @@ export default function CardEvent(props) {
             }}>
             Detail
         </Button>
-        { (location.pathname === '/' && showButton) &&
+        { (location.pathname === '/' && showButton) ?
         (
           <Button
             onClick={handleAddWishlist}
@@ -65,6 +69,21 @@ export default function CardEvent(props) {
               boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
             }}>
             Add to Wishlist
+          </Button>
+        ) :
+        (
+          <Button
+            onClick={handleRemoveWishlist}
+            style={{
+              margin: '8px 0px 12px 34px',
+              width: '100px',
+              height: '30px',
+              color: 'whitesmoke',
+              backgroundColor: '#F2C94C',
+              border: 'none',
+              boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
+            }}>
+            Remove from Wishlist
           </Button>
         )}
         </Card.Footer>

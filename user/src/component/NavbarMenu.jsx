@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Navbar, Nav, Button, Container } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
+import { useHistory, NavLink } from 'react-router-dom'
 
 export default function NavbarMenu() {
   const [local, setLocal] = useState(localStorage.getItem("access_token"))
@@ -18,12 +18,16 @@ export default function NavbarMenu() {
   return (
     <Container fluid>
       <Navbar style={{ height: '50px', }}>
-        <Navbar.Brand className='justify-content-end' href='#home'>Navbar</Navbar.Brand>
+        <Navbar.Brand className='justify-content-end'>
+          <NavLink exact to='/'>
+            Creativent
+          </NavLink>
+        </Navbar.Brand>
         { local &&
         (
           <Nav className='mr-auto'>
-            <Nav.Link className='mr-sm-2' href='#home'>Wishlist</Nav.Link>
-            <Nav.Link className='mr-sm-2' href='#features'>History Transaction</Nav.Link>
+            <NavLink to='/wishlist' className='mr-sm-2'>Wishlist</NavLink>
+            <NavLink to='/history' className='mr-sm-2'>History Transaction</NavLink>
           </Nav>
         )}
         { local ?
