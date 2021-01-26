@@ -1,24 +1,38 @@
 import React, { useState } from 'react'
 import { Container, Card, CardGroup, Form, Row, Col, Button, Modal } from 'react-bootstrap'
-import { } from 'react-router-dom'
-import { } from 'redux'
+import { useHistory } from 'react-router-dom' 
 
-export default function CardEventDetail() {
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+export default function CardEventDetail(props) {
+  const history = useHistory();
+  // const [show, setShow] = useState(false)
+  // const handleClose = () => setShow(false)
+  // const handleShow = () => setShow(true)
 
-  function submitHandle() {
-
+  function goHistory() {
+    history.push('/history');
   }
 
-  function cancelHandle() {
-    setShow(false)
+  if(!props.ticket) {
+    return <h1>Loading ...</h1>
   }
 
   return (
     <Container fluid>
-      <Modal
+      <div>{JSON.stringify(props.ticket)}</div>
+      <Button
+            onClick={goHistory}
+            style={{
+              width: 100,
+              height: 30,
+              color: 'whitesmoke',
+              backgroundColor: '#F2C94C',
+              border: 'none'
+            }}
+          >
+            Back to History
+          </Button>
+          
+      {/* <Modal
         size="lg"
         show={show}
         onHide={handleClose}
@@ -67,9 +81,9 @@ export default function CardEventDetail() {
             Cancel
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
 
-      <CardGroup className="m-4 d-block">
+      {/* <CardGroup className="m-4 d-block">
         <Card className="m-5 border-0 shadow" style={{
           backgroundColor: '#FFF5D5',
           borderRadius: 10,
@@ -119,7 +133,7 @@ export default function CardEventDetail() {
                   <br />
                 </Form>
                   <Button
-                    onClick={handleShow}
+                    // onClick={handleShow}
                     type='submit'
                     style={{
                       width: 100,
@@ -135,7 +149,7 @@ export default function CardEventDetail() {
             </Col>
           </Row>
         </Card>
-      </CardGroup>
+      </CardGroup> */}
     </Container>
   )
 }
