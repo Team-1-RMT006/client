@@ -1,7 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, CardDeck, Col } from 'react-bootstrap'
-import NavbarMenu from '../component/NavbarMenu'
 import Jumbotron from '../component/Jumbotron'
 import CardEvent from '../component/CardEvent'
 import FooterPage from '../component/FooterPage'
@@ -9,7 +8,6 @@ import FooterPage from '../component/FooterPage'
 export default function Mainpage() {
   return (
     <Container fluid>
-      <NavbarMenu />
       <Jumbotron />
       <hr /><br />
       <div
