@@ -14,3 +14,5 @@ function wishlistReducer(state = initState, action) {
       return state
   }
 }
+
+export default wishlistReducer
