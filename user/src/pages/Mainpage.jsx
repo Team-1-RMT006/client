@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, CardDeck, Col } from 'react-bootstrap'
 import Jumbotron from '../component/Jumbotron'
 import CardEvent from '../component/CardEvent'
 import FooterPage from '../component/FooterPage'
+import { useSelector, useDispatch } from 'react-redux'
+import {fetchEvent} from '../store/action/eventAction'
 
 export default function Mainpage() {
+  const events = useSelector(state => state.eventReducer.events)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchEvent())
+  }, [])
+
   return (
     <Container fluid>
       <Jumbotron />
@@ -26,15 +36,9 @@ export default function Mainpage() {
         </div>
         <Row>
           <CardDeck style={{ margin: '0px 17px' }}>
-            <Col lg={6} className='p-3'>
-              {/* <CardEvent /> */}
-            </Col>
-            <Col lg={6} className='p-3'>
-              {/* <CardEvent /> */}
-            </Col>
-            <Col lg={6} className='p-3'>
-              {/* <CardEvent /> */}
-            </Col>
+            { events.map(event => {
+              return <CardEvent data={event} key={event.id} />
+            })}
           </CardDeck>
         </Row>
       </div>
