@@ -27,13 +27,13 @@ export default function Mainpage() {
         <Row>
           <CardDeck style={{ margin: '0px 17px' }}>
             <Col lg={6} className='p-3'>
-              <CardEvent />
+              {/* <CardEvent /> */}
             </Col>
             <Col lg={6} className='p-3'>
-              <CardEvent />
+              {/* <CardEvent /> */}
             </Col>
             <Col lg={6} className='p-3'>
-              <CardEvent />
+              {/* <CardEvent /> */}
             </Col>
           </CardDeck>
         </Row>
