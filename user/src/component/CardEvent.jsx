@@ -1,18 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Card, Button } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
-import { } from 'redux'
+import { useHistory, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { addWishlist } from '../store/action/wishlistAction'
 
 export default function CardEvent(props) {
+  const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
   const history = useHistory()
+  const location = useLocation()
+  const dispatch = useDispatch()
+  const [showButton, setShowButton] = useState(true)
+
+  useEffect(() => {
+    for (let i = 0; i < wishlists.length; i++) {
+      if (wishlists[i].EventId === props.data.event.id) {
+        setShowButton(false)
+      }
+    }
+  }, [])
 
   function goDetail(id) {
     history.push(`event/${id}`)
   }
 
-  // function addWishlist() {
-  //   dispatchEvent({ type: 'ADD_WISHLIST', payload })
-  // }
+  function handleAddWishlist() {
+    dispatch(addWishlist(props.data.event.id))
+  }
 
   return (
     <Container>
@@ -38,8 +51,10 @@ export default function CardEvent(props) {
             }}>
             Detail
         </Button>
-          {/* <Button
-            onClick={addWishlist}
+        { (location.pathname === '/' && showButton) &&
+        (
+          <Button
+            onClick={handleAddWishlist}
             style={{
               margin: '8px 0px 12px 34px',
               width: '100px',
@@ -50,7 +65,8 @@ export default function CardEvent(props) {
               boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
             }}>
             Add to Wishlist
-        </Button> */}
+          </Button>
+        )}
         </Card.Footer>
       </Card>
     </Container>
