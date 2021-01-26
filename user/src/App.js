@@ -1,10 +1,17 @@
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useEffect } from 'react'
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { Login, Register, Wishlist, History, DetailEvent, Mainpage } from './pages/Index'
 import store from './store'
 
+
 export default function App() {
+  const access_token = localStorage.getItem('access_token');
+
+  if(access_token) {
+
+  }
+
   return (
     <Provider store={store}>
       <Switch>

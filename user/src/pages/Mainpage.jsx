@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, CardDeck, Col } from 'react-bootstrap'
 import NavbarMenu from '../component/NavbarMenu'
 import Jumbotron from '../component/Jumbotron'
 import CardEvent from '../component/CardEvent'
 import FooterPage from '../component/FooterPage'
+import { useHistory } from 'react-router-dom'
 
 export default function Mainpage() {
+  const history = useHistory()
+  useEffect(() => {
+    if(!localStorage.getItem("access_token")) {
+      history.push("/login")
+    }
+  })
+
   return (
     <Container fluid>
       <NavbarMenu />

@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import {userRegister} from '../store/action/user'
+import { Link, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { userRegister } from '../store/action/user'
 
 export default function Register() {
+  const statusRegister = useSelector(state => state.statusRegister)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const history = useHistory()
   const dispatch = useDispatch()
-
+    
   const handlerSubmit = e => {
     e.preventDefault()
     const payload = {
@@ -20,20 +22,17 @@ export default function Register() {
       email: email.target.value,
       password: password.target.value
     }
-    // console.log(firstName.target.value, lastName.target.value, email.target.value, password.target.value);
-    userRegister(payload)
-    console.log(payload)
-    
-    // dispatch({
-    //   type: 'REGISTER',
-    //   payload: {
-    //     firstName,
-    //     lastName,
-    //     email,
-    //     password
-    //   }
-    // })
+    dispatch(userRegister(payload))
   }
+  
+  useEffect(() => {
+    if(statusRegister.statusRegister) {
+      console.log(statusRegister, "ini atas")
+      history.push("/login")
+    }else {
+      console.log(statusRegister);
+    }
+  }, [statusRegister])
 
   return (
     <Container fluid>
@@ -64,23 +63,23 @@ export default function Register() {
                 <Col>
                   <Form.Group controlId='firstname'>
                     <Form.Label><strong>First Name</strong></Form.Label>
-                    <Form.Control type='firstname' onChange={(e) => setFirstName(e)} placeholder={firstName} />
+                    <Form.Control type='firstname' onChange={(e) => setFirstName(e)} placeholder={"e.g Febrian"} />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group controlId='formGroupLastName'>
                     <Form.Label><strong>Last Name</strong></Form.Label>
-                    <Form.Control type='lastname' onChange={e => setLastName(e)} placeholder={lastName} />
+                    <Form.Control type='lastname' onChange={e => setLastName(e)} placeholder={"e.g Aditya"} />
                   </Form.Group>
                 </Col>
               </Row>
               <Form.Group controlId='formGroupEmail'>
                 <Form.Label><strong>Email</strong></Form.Label>
-                <Form.Control type='email' onChange={e => setEmail(e)} placeholder={email} />
+                <Form.Control type='email' onChange={e => setEmail(e)} placeholder={"febrian.aksen@mail.com"} />
               </Form.Group>
               <Form.Group controlId='formGroupPassword'>
                 <Form.Label><strong>Password</strong></Form.Label>
-                <Form.Control type='password' onChange={e => setPassword(e)} placeholder={password} />
+                <Form.Control type='password' onChange={e => setPassword(e)} placeholder={"Please input min 7 character"} />
               </Form.Group>
               <br />
               <Button
