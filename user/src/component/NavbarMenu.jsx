@@ -37,7 +37,7 @@ export default function NavbarMenu() {
         (
           <Nav className='mr-auto'>
             <NavLink to='/wishlist' className='mr-sm-2'>Wishlist</NavLink>
-            <NavLink to='/history' className='mr-sm-2'>History Transaction</NavLink>
+            <NavLink to='/history' className='mr-sm-2'>My Tickets</NavLink>
           </Nav>
         )}
         { local ?

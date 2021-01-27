@@ -5,8 +5,8 @@ import Jumbotron from '../component/Jumbotron'
 import CardEvent from '../component/CardEvent'
 import FooterPage from '../component/FooterPage'
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchEvent} from '../store/action/eventAction'
-import {fetchWishlist} from '../store/action/wishlistAction'
+import { fetchEvent } from '../store/action/eventAction'
+import { fetchWishlist } from '../store/action/wishlistAction'
 import { useHistory } from "react-router-dom"
 
 export default function Mainpage() {
@@ -17,7 +17,7 @@ export default function Mainpage() {
 
   const dispatch = useDispatch()
   const history = useHistory()
-  
+
   // useEffect(() => {
   //   if(!localStorage.getItem("access_token")) {
   //     history.push("/login")
@@ -54,11 +54,13 @@ export default function Mainpage() {
           <hr />
         </div>
         <Row>
-          <CardDeck style={{ margin: '0px 17px' }}>
-            { events.map(event => {
-              return <CardEvent data={event} key={event.id} />
-            })}
-          </CardDeck>
+          <Col>
+            <CardDeck style={{ margin: '15px 12px' }}>
+              {events.map(event => {
+                return <CardEvent data={event} key={event.id} />
+              })}
+            </CardDeck>
+          </Col>
         </Row>
       </div>
       <FooterPage />

@@ -22,7 +22,7 @@ export default function Wishlist() {
         </div>
         <Row>
           <CardDeck style={{ margin: '0px 24px' }}>
-            <Col lg={6} className='p-3'>
+            <Col lg={6} className='p-3' style={{width: 500}}>
               { wishlists.map(wishlist => {
                 return <CardWishlist data={wishlist} key={wishlist.id} />
               })}
