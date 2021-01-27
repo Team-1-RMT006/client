@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useEffect } from 'react'
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { Login, Register, Wishlist, History, DetailEvent, Mainpage } from './pages/Index'
+import { Login, Register, Wishlist, History, DetailEvent, Mainpage, LandingPage } from './pages/Index'
 import store from './store'
 import NavbarMenu from './component/NavbarMenu'
+import './App.css'
 
 
 export default function App() {
@@ -34,6 +35,9 @@ export default function App() {
         </Route>
         <Route path='/event/:id'>
           <DetailEvent />
+        </Route>
+        <Route path='/landing'>
+          <LandingPage />
         </Route>
       </Switch>
     </Provider>
