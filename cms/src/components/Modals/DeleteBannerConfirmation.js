@@ -1,13 +1,12 @@
-import {DeleteEvent} from '../../hooks/ApiRequest'
+import {RemoveBanner} from '../../hooks/ApiRequest'
 import {useDispatch} from 'react-redux';
-import { fetchEventsByOrganizer, fetchEventsByStatus } from '../../store/actions';
+import { fetchBanner } from '../../store/actions';
 import { toast } from 'react-toastify';
 import {SuccesAlert, ErrorAlert} from '../Alert/Alert'
 
 
 function DeleteConfirmation ({handleDelete, id}) {
   const dispatch = useDispatch();
-
 
   const successNotif = (m) => {
     toast.success(<SuccesAlert message={m}/>);
@@ -17,11 +16,10 @@ function DeleteConfirmation ({handleDelete, id}) {
   }
 
   function confirmDelete () {
-    DeleteEvent(id)
+    RemoveBanner(id)
       .then(response => {
         successNotif(response.data.message);
-        dispatch(fetchEventsByOrganizer());
-        dispatch(fetchEventsByStatus());
+        dispatch(fetchBanner());
         handleDelete();
       })
       .catch(err => {
@@ -43,7 +41,7 @@ function DeleteConfirmation ({handleDelete, id}) {
         <div className="md:flex w-full">
           <div className="w-full py-5 px-5 md:px-10">
             <div className="text-center mb-5">
-              <h1 className="font-bold text-3xl text-gray-900">Are you sure want to delete this event?</h1>
+              <h1 className="font-bold text-3xl text-gray-900">Are you sure want to delete this banner?</h1>
             </div>
             <div>
               <div className="flex -mx-3">

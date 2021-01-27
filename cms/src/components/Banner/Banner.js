@@ -1,17 +1,30 @@
 import {useHistory} from 'react-router-dom';
 import {useEffect, useState} from 'react';
-import DeleteConfirmation from '../Modals/DeleteConfirmation'
+import DeleteBannerConfirmation from '../Modals/DeleteBannerConfirmation'
 import BannerList from './BannerList';
 import EditBanner from '../Forms/EditBanner';
 import AddBanner from '../Forms/AddBanner';
+import { useSelector } from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {fetchBanner} from '../../store/actions';
+import Loader from '../Modals/Loader';
 
 function Banner ({loggedIn}) {
   const history = useHistory();
+  const dispatch = useDispatch();
+
   useEffect(()=>{
-    if(!loggedIn){
-      history.push('/');
+    if(localStorage.getItem('access_token')){
+      if(localStorage.getItem('isAdmin') === 'false') {
+        history.push('/');
+      }
     }
   }, [loggedIn, history]);
+
+  useEffect(()=>{
+    dispatch(fetchBanner());
+  }, [])
+
 
   const [toDelete, setToDelete] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -30,44 +43,18 @@ function Banner ({loggedIn}) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   function handleAddForm(){
     setShowCreateForm(!showCreateForm);
-  }
+  } 
 
-  const [bannerData, setBannerData] = useState([
-    {
-      id: 1,
-      image_url: 'https://png.pngtree.com/thumb_back/fh260/back_pic/00/04/53/9556248b4747950.png',
-      detail: 'Milik Organisasi A'
-    },
-    {
-      id: 2,
-      image_url: 'https://png.pngtree.com/thumb_back/fh260/back_pic/00/04/53/9556248b4747950.png',
-      detail: 'Milik Organisasi B'
-    },{
-      id: 3,
-      image_url: 'https://png.pngtree.com/thumb_back/fh260/back_pic/00/04/53/9556248b4747950.png',
-      detail: null
-    },
-    {
-      id: 4,
-      image_url: 'https://png.pngtree.com/thumb_back/fh260/back_pic/00/04/53/9556248b4747950.png',
-      detail: null
-    },
-    {
-      id: 5,
-      image_url: 'https://png.pngtree.com/thumb_back/fh260/back_pic/00/04/53/9556248b4747950.png',
-      detail: 'PROMO NIH'
-    },
-    {
-      id: 6,
-      image_url: 'https://png.pngtree.com/thumb_back/fh260/back_pic/00/04/53/9556248b4747950.png',
-      detail: 'Yoi mantap'
-    },
-    {
-      id: 7,
-      image_url: 'https://png.pngtree.com/thumb_back/fh260/back_pic/00/04/53/9556248b4747950.png',
-      detail: 'Pengen ganti kibod'
-    }
-  ])
+  const banner = useSelector(state => state.bannerReducer.banners);
+  const loading = useSelector(state => state.bannerReducer.loading);
+
+  if(loading) {
+    return (
+      <div className="flex flex-col h-screen w-4/5 bg-gray-900">
+        <Loader />
+      </div>
+    )
+  }
   return (
     <div className="flex flex-col h-screen w-4/5 bg-gray-900">
       <div className="flex justify-end">
@@ -97,7 +84,7 @@ function Banner ({loggedIn}) {
           </thead>
           <tbody class="divide-y bg-gray-100">
             {
-              bannerData.map(banner => {
+              banner.map(banner => {
                 return (
                   <BannerList 
                     key={banner.id} 
@@ -122,7 +109,7 @@ function Banner ({loggedIn}) {
       {
         showDeleteModal ?
         <div className="bg-black bg-opacity-50 absolute inset-0 flex justify-center items center">
-          <DeleteConfirmation handleDelete={handleDelete} id={toDelete} />
+          <DeleteBannerConfirmation handleDelete={handleDelete} id={toDelete} />
         </div> : ''
       }
       {

@@ -1,11 +1,17 @@
 import Navigation from './Navigation.js'
 import {Link} from 'react-router-dom';
+import { toast } from 'react-toastify';
+import {SuccesAlert} from '../Alert/Alert'
 
 function Sidebar ({loggedIn, setLoggedIn}) {
+  const successNotif = (m) => {
+    toast.success(<SuccesAlert message={m}/>);
+  }
+
   return (
     <div className="w-1/5 h-screen bg-gray-800 sm:mt-0">
       <div className="flex items-center justify-center mt-10">
-        <img className="h-6" src="https://premium-tailwindcomponents.netlify.app/assets/svg/tailwindcomponent-light.svg" alt=""></img>
+        <p className="text-4xl italic font-bold text-gray-100">Creativent</p>
       </div>
       <nav className="mt-10">
         {
@@ -18,6 +24,8 @@ function Sidebar ({loggedIn, setLoggedIn}) {
               <button 
                 onClick={(e)=>{
                   e.preventDefault();
+                  localStorage.clear();
+                  successNotif("See You Next Time")
                   setLoggedIn(false);
                 }}>
                 <Link 

@@ -9,16 +9,31 @@ import Register from './components/userSign/Register';
 import EventDetail from './components/Details/EventDetail';
 import MyEvent from './components/MyEvent/MyEvent';
 import Banner from './components/Banner/Banner';
-
 import {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import {useDispatch} from 'react-redux'
+import {fetchEventsType} from './store/actions'
 
+
+toast.configure();
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const dispatch = useDispatch();
+  const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
+
   useEffect(()=>{
-    if(loggedIn){
-      history.push('/');
+    dispatch(fetchEventsType());
+  }, [])
+
+  useEffect(()=>{
+
+  })
+
+  useEffect(()=>{
+    if(localStorage.getItem('access_token')){
+      setLoggedIn(true);
     }else {
       history.push('/login');
     }
@@ -29,22 +44,22 @@ function App() {
         <Sidebar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         <Switch>
           <Route exact path="/">
-            <Dashboard loggedIn={loggedIn} />
+            <Dashboard loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
           </Route>
-          <Route path="/detail/:id">
+          <Route path="/detail/:id" loggedIn={loggedIn} setLoggedIn={setLoggedIn}>
             <EventDetail />
           </Route>
-          <Route path="/event/:id">
-            <MyEvent loggedIn={loggedIn} />
+          <Route exact path="/event">
+            <MyEvent loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
           </Route>
           <Route exact path="/banner">
-            <Banner loggedIn={loggedIn} />
+            <Banner loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
           </Route>
           <Route exact path="/login">
-            <Login loggedIn={loggedIn} />
+            <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
           </Route>
           <Route exact path="/register">   
-            <Register loggedIn={loggedIn} />
+            <Register loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
           </Route>
         </Switch>
       </div>

@@ -1,11 +1,43 @@
 import {useState} from 'react';
+import {AddNewBanner} from '../../hooks/ApiRequest'
+import { toast } from 'react-toastify';
+import {SuccesAlert, ErrorAlert} from '../Alert/Alert'
+import {useDispatch} from 'react-redux';
+import {fetchBanner} from '../../store/actions';
+
 
 function AddBanner ({handleAddForm}) {
+  const dispatch = useDispatch();
   const [inputUser, setInputUser] = useState({
     banner: 'https://st4.depositphotos.com/17828278/24401/v/600/depositphotos_244011872-stock-illustration-image-vector-symbol-missing-available.jpg',
     detail: ''
   });
+  const successNotif = (m) => {
+    toast.success(<SuccesAlert message={m}/>);
+  }
+  const errorNotif = (m) => {
+    toast.success(<ErrorAlert message={m}/>);
+  }
+
   console.log(inputUser);
+
+  function handleAddBanner () {
+    const payload = {
+      image_url: inputUser.banner,
+      detail: inputUser.detail
+    }
+
+    AddNewBanner(payload)
+      .then(response => {
+        successNotif('New Banner Has Been Added');
+        dispatch(fetchBanner());
+        handleAddForm();
+      })
+      .catch(err => {
+        errorNotif(`${err.response.data.message}`)
+      })
+  }
+  
   return (
     <div className="h-screen flex items-center justify-center px-5 py-5">
       <div className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style={{maxWidth: 1000}}>
@@ -32,6 +64,7 @@ function AddBanner ({handleAddForm}) {
                     <img 
                       className="max-h-64"
                       src={inputUser.banner}
+                      alt="preview"
                     ></img>
                   </div>
                   <label htmlFor="" className="text-xs font-semibold px-1">Image</label>
@@ -75,7 +108,15 @@ function AddBanner ({handleAddForm}) {
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                     </div>
-                    <input type="text" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="" />
+                    <input 
+                      type="text" 
+                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" 
+                      placeholder=""
+                      value={inputUser.detail}
+                      onChange={(e)=>{
+                        e.preventDefault();
+                        setInputUser({...inputUser, detail: e.target.value})
+                      }} />
                   </div>
                 </div>
               </div>
@@ -85,9 +126,9 @@ function AddBanner ({handleAddForm}) {
                     className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
                     onClick={(e)=>{
                       e.preventDefault();
-                      handleAddForm();
+                      handleAddBanner();
                     }}
-                    >Create
+                    >Add New Banner
                   </button>
                 </div>
               </div>

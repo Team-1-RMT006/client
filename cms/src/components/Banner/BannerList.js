@@ -2,7 +2,7 @@ function BannerList({banner, handleEditBanner, handleDelete}){
   return (
     <tr>
       <td class="px-6 py-4 text-center">
-        <img src="https://png.pngtree.com/thumb_back/fh260/back_pic/00/04/53/9556248b4747950.png" alt="gambarBanner"></img>
+        <img src={banner.image_url} alt="gambarBanner"></img>
       </td>
       <td class="px-6 py-4 text-center">{banner.detail}</td>
       <td class="px-6 py-4 text-center">
@@ -10,7 +10,7 @@ function BannerList({banner, handleEditBanner, handleDelete}){
           className="w-full bg-white ml-2 mt-2 text-gray-800 font-bold focus:outline-none rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center justify-center"
           onClick={(e)=>{
             e.preventDefault();
-            handleEditBanner();
+            handleEditBanner(banner);
           }}
           >
           <span className="mr-2">Edit</span>
@@ -22,7 +22,7 @@ function BannerList({banner, handleEditBanner, handleDelete}){
           className="w-full bg-white ml-2 mt-2 mb-4 text-gray-800 font-bold focus:outline-none rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center justify-center"
           onClick={(e)=>{
             e.preventDefault();
-            handleDelete();
+            handleDelete(banner.id);
           }}
           >
           <span className="mr-2">Delete</span>

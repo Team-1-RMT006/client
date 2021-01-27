@@ -4,6 +4,7 @@ import DeleteConfirmation from '../Modals/DeleteConfirmation';
 import TableBody from '../Table/TableBody'
 
 function TableEvent ({myEvent}) {
+  console.log(myEvent)
   const [showEditForm, setShowEditForm] = useState(false);
   const [toEdit, setToEdit] = useState(null);
   function handleEditForm(value = null){
@@ -27,13 +28,13 @@ function TableEvent ({myEvent}) {
               <thead>
                 <tr>
                   <th className="w-1/3 sticky top-0 px-6 py-3 text-gray-100 bg-gray-700"></th>
-                  <th className="w-1/3 sticky top-0 px-6 py-3 text-gray-100 bg-gray-700">{status.status}</th>
+                  <th className="w-1/3 sticky top-0 px-6 py-3 text-gray-100 bg-gray-700">{status.name.toUpperCase()}</th>
                   <th className="w-1/3 sticky top-0 px-6 py-3 text-gray-100 bg-gray-700"></th>
                 </tr>
               </thead>
               <tbody className="divide-y bg-gray-100">
                 {
-                  status.event.map(listEvent => {
+                  status.Events.map(listEvent => {
                     return (
                       <TableBody
                         key={listEvent.id}
