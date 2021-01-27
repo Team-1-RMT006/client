@@ -34,6 +34,11 @@ function App() {
   useEffect(()=>{
     if(localStorage.getItem('access_token')){
       setLoggedIn(true);
+      if(localStorage.getItem('isAdmin') === 'true') {
+        history.push('/');
+      } else {
+        history.push('/event')
+      }
     }else {
       history.push('/login');
     }

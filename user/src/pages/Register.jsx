@@ -27,7 +27,6 @@ export default function Register() {
     email: email,
     password: password
   }
-
   function handleRegister() {
     registering(inputData)
     .then(response => {
