@@ -4,6 +4,7 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { userLogin } from "../store/action/user"
+import Swal from 'sweetalert2'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -30,9 +31,7 @@ export default function Login() {
       history.push("/")
     })
     .catch(err => {
-      // console.log(err);
-      console.log("--------")
-      // console.log(err.response.data.message)
+      Swal.fire(`${err.response.data.message}`);
     })
   }
 

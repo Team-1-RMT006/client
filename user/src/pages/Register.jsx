@@ -3,26 +3,49 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { userRegister } from '../store/action/user'
+import {registering} from '../hooks/apiRequest'
+import Swal from 'sweetalert2'
 
 export default function Register() {
   const statusRegister = useSelector(state => state.statusRegister)
+  // const [inputData, setInputData] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   email: '',
+  //   password: ''
+  // })
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  // const [errorMsg, setErrorMsg] = useState([])
   const history = useHistory()
-  const dispatch = useDispatch()
-    
+  
+  const inputData = {
+    first_name: firstName.target.value,
+    last_name: lastName.target.value,
+    email: email.target.value,
+    password: password.target.value
+  }
+  console.log(firstName.target.value, '<<<<<<<<<')
+  function handleRegister() {
+    console.log(inputData)
+    registering(inputData)
+    .then(response => {
+      Swal.fire('Your New Account Is Ready!');
+      history.push('/login');
+    })
+    .catch(err => {
+      console.log(`${err.response.data.message}`);
+      Swal.fire(`${err.response.data.message}`)
+      // setErrorMsg(err.response.data.message)
+    })
+  }
+
+
   const handlerSubmit = e => {
     e.preventDefault()
-    const payload = {
-      firstName: firstName.target.value,
-      lastName: lastName.target.value,
-      email: email.target.value,
-      password: password.target.value
-    }
-    dispatch(userRegister(payload))
+    handleRegister()
   }
   
   useEffect(() => {
@@ -63,7 +86,7 @@ export default function Register() {
                 <Col>
                   <Form.Group controlId='firstname'>
                     <Form.Label><strong>First Name</strong></Form.Label>
-                    <Form.Control type='firstname' onChange={(e) => setFirstName(e)} placeholder={"e.g Febrian"} />
+                    <Form.Control type='firstname' onChange={e => setFirstName(e)} placeholder={"e.g Febrian"} />
                   </Form.Group>
                 </Col>
                 <Col>

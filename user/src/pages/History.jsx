@@ -26,14 +26,16 @@ export default function History() {
       <div style={{ width: '1280px', height: '500px', backgroundColor: '#FFF5D5', alignItems: 'center', borderRadius: '5px', margin: '20px auto' }}>
         <div inline style={{ padding: '17px 35px' }}>
           <h1><strong>Tickets</strong></h1>
-          <hr /><br/>
+          <hr /><br />
           <Form className='mr-auto'>
             <Form.Control style={{ width: '500px' }} type="text" placeholder="Search" />
           </Form>
         </div>
         <Row>
           <CardDeck style={{ margin: '0px 17px' }}>
-            {tickets.map(ticket => <Col lg={6} className='p-3'><CardEvent data={ticket} key={ticket.id} /></Col>)}
+            {tickets.map(ticket => {
+              return <CardEvent data={ticket} key={ticket.id} />
+            })}
           </CardDeck>
         </Row>
       </div>
