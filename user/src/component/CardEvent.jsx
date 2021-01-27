@@ -18,6 +18,7 @@ export default function CardEvent(props) {
   }, [temp])
 
   useEffect(() => {
+    console.log('ini wishlist >>>>', wishlists)
     let isWishlist = false
     for (let i = 0; i < wishlists.length; i++) {
       if (wishlists[i].EventId === props.data.id) {

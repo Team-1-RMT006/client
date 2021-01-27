@@ -32,7 +32,7 @@ export default function Login() {
     .catch(err => {
       // console.log(err);
       console.log("--------")
-      console.log(err.response.data.message)
+      // console.log(err.response.data.message)
     })
   }
 
