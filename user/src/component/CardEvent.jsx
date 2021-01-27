@@ -58,7 +58,7 @@ export default function CardEvent(props) {
               <h4>{props.data.location}</h4>
             </Card.Text>
             <Row>
-              <Col>
+              <Col sm={6}>
                 <h6>{props.data.date}</h6>
                 <h6>{props.data.time}</h6>
               </Col>
