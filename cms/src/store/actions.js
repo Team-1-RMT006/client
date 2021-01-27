@@ -43,6 +43,20 @@ export function setEventsType (payload) {
   }
 }
 
+export function setOrganizers (payload) {
+  return {
+    type: "SET_ORGANIZERS",
+    payload
+  }
+}
+
+export function setLoadingOrganizer (payload) {
+  return {
+    type: "SET_LOADING_ORGANIZERS",
+    payload
+  }
+}
+
 export function fetchEventsByStatus (payload) {
   return (dispatch, getState) => {
     dispatch(setLoadingEvent(true));
@@ -115,6 +129,26 @@ export function fetchBanner () {
     .then(response => {
       dispatch(setBanner(response.data));
       dispatch(setLoadingBanner(false));
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+}
+
+export function fetchOrganizerList () {
+  return (dispatch, getState) => {
+    dispatch(setLoadingOrganizer(true));
+    axios({
+      method:"GET",
+      url: `${baseUrl}admin/organizers`,
+      headers: {
+        access_token: localStorage.getItem('access_token')
+      }
+    })
+    .then(response =>{
+      dispatch(setOrganizers(response.data));
+      dispatch(setLoadingEvent(false));
     })
     .catch(err => {
       console.log(err);

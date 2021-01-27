@@ -4,8 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import CreateEvent from '../Forms/CreateEvent';
 import Loader from '../Modals/Loader';
+import NewEventType from '../Forms/NewEventType'
 import { fetchEventsByStatus } from '../../store/actions';
-
 
 
 function Dashboard ({loggedIn}) {
@@ -20,6 +20,11 @@ function Dashboard ({loggedIn}) {
   useEffect(()=>{
     dispatch(fetchEventsByStatus());
   }, [])
+
+  const [showAddNewType, setShowAddNewType] = useState(false);
+  function handleAddNewType(){
+    setShowAddNewType(!showAddNewType);
+  }
 
   const loading = useSelector(state => state.eventReducer.loading);
   const myEvent = useSelector(state => state.eventReducer.eventsByStatus);
@@ -68,7 +73,7 @@ function Dashboard ({loggedIn}) {
       <div className="flex flex-col h-screen w-4/5 bg-gray-900">
         <div className="flex flex-row justify-between">
           <div className="flex">
-            <div className="m-3">
+            <div className="m-2">
               <button 
                 className="bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
                 onClick={(e)=>{
@@ -82,7 +87,7 @@ function Dashboard ({loggedIn}) {
                 </svg>
               </button>
             </div>
-            <div className="m-3">
+            <div className="m-2">
               <button 
                 className="bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
                 onClick={(e)=>{
@@ -96,7 +101,7 @@ function Dashboard ({loggedIn}) {
                 </svg>
               </button>
             </div>
-            <div className="m-3">
+            <div className="m-2">
               <button 
                 className="bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
                 onClick={(e)=>{
@@ -112,9 +117,9 @@ function Dashboard ({loggedIn}) {
             </div>
           </div>
           <div className="flex">
-            <div className="m-3">
+            <div className="m-2">
               <button 
-                className="bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+                className="bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 p-1 inline-flex items-center"
                 onClick={(e)=>{
                   e.preventDefault();
                   handleCreateForm();
@@ -125,6 +130,21 @@ function Dashboard ({loggedIn}) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </button>
+              {
+                localStorage.getItem('isAdmin') === 'true' ?
+                <button 
+                  className="ml-2 bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 p-1 inline-flex items-center"
+                  onClick={(e)=>{
+                    e.preventDefault();
+                    handleAddNewType();
+                  }}
+                  >
+                  <span className="mr-2">Add New Event Type</span>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </button> : ''
+              }
             </div>
           </div>
         </div>
@@ -134,6 +154,12 @@ function Dashboard ({loggedIn}) {
           <div className="bg-black bg-opacity-50 absolute inset-0 flex justify-center items center">
             <CreateEvent handleCreateForm={handleCreateForm}/>
           </div> : ''
+        }
+        {
+        showAddNewType ? 
+        <div className="bg-black bg-opacity-50 absolute inset-0 flex justify-center items center">
+          <NewEventType handleAddNewType={handleAddNewType}/>
+        </div> : ''
         }
       </div>
     )
@@ -179,10 +205,10 @@ export default Dashboard;
 //     setShowCreateForm(!showCreateForm);
 //   }
 
-//   const [showAddNewType, setShowAddNewType] = useState(false);
-//   function handleAddNewType(){
-//     setShowAddNewType(!showAddNewType);
-//   }
+  // const [showAddNewType, setShowAddNewType] = useState(false);
+  // function handleAddNewType(){
+  //   setShowAddNewType(!showAddNewType);
+  // }
 
 //   return (
 //     <div className="flex flex-col h-screen w-4/5 bg-gray-900">
@@ -200,21 +226,21 @@ export default Dashboard;
 //               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 //             </svg>
 //           </button>
-//           {
-//             localStorage.getItem('isAdmin') === 'true' ?
-//             <button 
-//               className="ml-2 bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
-//               onClick={(e)=>{
-//                 e.preventDefault();
-//                 handleAddNewType();
-//               }}
-//               >
-//               <span className="mr-2">Add New Event Type</span>
-//               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-//               </svg>
-//             </button> : ''
-//           }
+          // {
+          //   localStorage.getItem('isAdmin') === 'true' ?
+          //   <button 
+          //     className="ml-2 bg-white text-gray-800 font-bold focus:outline-none rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+          //     onClick={(e)=>{
+          //       e.preventDefault();
+          //       handleAddNewType();
+          //     }}
+          //     >
+          //     <span className="mr-2">Add New Event Type</span>
+          //     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          //       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          //     </svg>
+          //   </button> : ''
+          // }
 //          </div>
 //       </div>
 //       <div className="flex-grow overflow-auto">
@@ -226,12 +252,12 @@ export default Dashboard;
 //           <CreateEvent handleCreateForm={handleCreateForm}/>
 //         </div> : ''
 //       }
-//       {
-//         showAddNewType ? 
-//         <div className="bg-black bg-opacity-50 absolute inset-0 flex justify-center items center">
-//           <NewEventType handleAddNewType={handleAddNewType}/>
-//         </div> : ''
-//       }
+      // {
+      //   showAddNewType ? 
+      //   <div className="bg-black bg-opacity-50 absolute inset-0 flex justify-center items center">
+      //     <NewEventType handleAddNewType={handleAddNewType}/>
+      //   </div> : ''
+      // }
 //     </div>
 //   )
 // }

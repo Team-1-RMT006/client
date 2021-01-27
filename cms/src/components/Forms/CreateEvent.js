@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import { toast } from 'react-toastify';
-import {SuccesAlert, WarningAlert, ErrorAlert} from '../Alert/Alert'
+import {SuccesAlert, ErrorAlert} from '../Alert/Alert'
 import {CreateNewEvent} from '../../hooks/ApiRequest';
 import { useSelector } from 'react-redux';
 import {useDispatch} from 'react-redux';
@@ -9,7 +9,7 @@ import {fetchEventsByOrganizer, fetchEventsByStatus} from '../../store/actions'
 function CreateEvent({handleCreateForm}) {
   const dispatch = useDispatch();
   const [inputData, setInputData] = useState({
-    OrganizerId: null,
+    OrganizerId: 1,
     title: '',
     date: '',
     time: '00:00',
@@ -25,7 +25,7 @@ function CreateEvent({handleCreateForm}) {
   })
   const [isAdmin] = useState(localStorage.getItem('isAdmin'));
   const eventType = useSelector(state => state.eventReducer.eventsType);
-  console.log(inputData);
+  const organizerList = useSelector(state => state.organizersReducer.organizers);
   const [checkedType, setcheckedType] = useState({
     regular: false,
     vip: false,
@@ -47,7 +47,7 @@ function CreateEvent({handleCreateForm}) {
         successNotif();
       })
       .catch((err)=>{
-        // console.log(err.response.data)
+        console.log(err.response.data)
         if(err.response.status === 400) {
           for(let i = 0; i < err.response.data.message.length; i++){
             errorNotif(`${err.response.data.message[i]}`);
@@ -91,11 +91,20 @@ function CreateEvent({handleCreateForm}) {
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     </div>
-                    <input 
-                      type="text" 
-                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" 
-                      placeholder=""
-                      />
+                    <select 
+                      value={inputData.OrganizerId}
+                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      onChange={(e)=>{
+                        setInputData({...inputData, OrganizerId: e.target.value})
+                      }}>
+                        {
+                          organizerList.map(organizer => {
+                            return (
+                              <option value={organizer.id}>{organizer.name}</option>
+                            )
+                          })
+                        }
+                    </select>
                   </div>
                 </div>
               </div>

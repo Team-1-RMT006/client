@@ -5,7 +5,7 @@ const baseUrl = "http://localhost:3000/"
 export function CreateNewEvent(payload, checked, role) {
   let postUrl = `${baseUrl}organizers/events`
   if(role === 'true') {
-    postUrl = `${baseUrl}admin/events`
+    postUrl = `${baseUrl}admin/event`
   } else {
     delete payload.organizerId;
   }
@@ -33,6 +33,40 @@ export function CreateNewEvent(payload, checked, role) {
     }
   })
 }
+
+export function updateEvent (payload, checked, role, id){
+  let putUrl = `${baseUrl}organizers/events/${id}`
+  if(role === 'true') {
+    putUrl = `${baseUrl}admin/event/${id}`
+  } else {
+    delete payload.organizerId;
+  }
+
+  console.log(putUrl);
+  
+  if(!checked.regular) {
+    payload.price_regular = null;
+    payload.capacity_regular = null;
+  }
+  if(!checked.vip) {
+    payload.price_vip = null;
+    payload.capacity_vip = null;
+  }
+  if(!checked.vvip) {
+    payload.price_vvip = null;
+    payload.capacity_vvip = null;
+  }
+
+  return axios({
+    method: "PUT",
+    url: putUrl,
+    data: payload,
+    headers: {
+      access_token: localStorage.getItem("access_token")
+    }
+  })
+}
+
 
 export function AddNewEventType(payload) {
   return axios({

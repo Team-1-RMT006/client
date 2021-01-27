@@ -14,7 +14,7 @@ import {useHistory} from 'react-router-dom';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {useDispatch} from 'react-redux'
-import {fetchEventsType} from './store/actions'
+import {fetchEventsType, fetchOrganizerList} from './store/actions'
 
 
 toast.configure();
@@ -28,8 +28,8 @@ function App() {
   }, [])
 
   useEffect(()=>{
-
-  })
+    dispatch(fetchOrganizerList());
+  }, [])
 
   useEffect(()=>{
     if(localStorage.getItem('access_token')){
