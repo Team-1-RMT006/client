@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Card, Button } from 'react-bootstrap'
+import { Col, Card, Button } from 'react-bootstrap'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchWishlist, removeWishlist } from '../store/action/wishlistAction'
@@ -24,32 +24,32 @@ export default function CardEvent(props) {
   }
 
   return (
-    <Container>
-      <Card style={{ margin: 15 }}>
-        <Card.Header>Featured</Card.Header>
+    <Col lg={6}>
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={'https://infomedhealth.com/wp-content/uploads/2018/11/download.png'} />
         <Card.Body>
-          <Card.Title><strong>{props.data.title}</strong></Card.Title>
-          <Card.Text>
-          {props.data.location}
-          </Card.Text>
+          <h2><strong>{'Event title'}</strong></h2>
+          <span>{'event date'}</span>
+          <span>{'event time'}</span>
+          <hr /><br />
           <Button
             onClick={() => goDetail(props.data.id)}
             style={{
-              margin: '20px 0px 0px 34px',
-              width: '150px',
+              margin: 3,
+              width: '180px',
               height: '30px',
               color: 'whitesmoke',
               backgroundColor: '#F2C94C',
               border: 'none',
               boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
             }}>
-            Detail
-        </Button>
+            Pay Now
+      </Button>
           <Button
             onClick={handleRemoveWishlist}
             style={{
-              margin: '8px 0px 12px 34px',
-              width: '150px',
+              margin: 3,
+              width: '180px',
               height: '30px',
               color: 'whitesmoke',
               backgroundColor: '#F2C94C',
@@ -57,9 +57,9 @@ export default function CardEvent(props) {
               boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
             }}>
             Remove from Wishlist
-          </Button>
+        </Button>
         </Card.Body>
       </Card>
-    </Container>
+    </Col>
   )
 }

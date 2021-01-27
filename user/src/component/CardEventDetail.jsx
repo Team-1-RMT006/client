@@ -145,7 +145,7 @@ export default function CardEventDetail(props) {
                       border: 'none'
                     }}
                   >
-                    Book
+                    My Ticket
                   </Button>
                 }
                 <Button
