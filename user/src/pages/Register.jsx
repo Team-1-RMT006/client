@@ -92,17 +92,17 @@ export default function Register() {
                 <Col>
                   <Form.Group controlId='formGroupLastName'>
                     <Form.Label><strong>Last Name</strong></Form.Label>
-                    <Form.Control type='lastname' onChange={e => setInputData({...inputData, lasName: e.target.value})} placeholder={"e.g Aditya"} />
+                    <Form.Control type='lastname' onChange={e => setLastName(e)} placeholder={"e.g Aditya"} />
                   </Form.Group>
                 </Col>
               </Row>
               <Form.Group controlId='formGroupEmail'>
                 <Form.Label><strong>Email</strong></Form.Label>
-                <Form.Control type='email' onChange={e => setInputData({...inputData, email: e.target.value})} placeholder={"febrian.aksen@mail.com"} />
+                <Form.Control type='email' onChange={e => setEmail(e)} placeholder={"febrian.aksen@mail.com"} />
               </Form.Group>
               <Form.Group controlId='formGroupPassword'>
                 <Form.Label><strong>Password</strong></Form.Label>
-                <Form.Control type='password' onChange={e => setInputData({...inputData, password: e.target.value})} placeholder={"Please input min 7 character"} />
+                <Form.Control type='password' onChange={e => setPassword(e)} placeholder={"Please input min 7 character"} />
               </Form.Group>
               <br />
               <Button
