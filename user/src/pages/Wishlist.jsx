@@ -10,9 +10,9 @@ export default function Wishlist() {
   const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(fetchWishlist())
-  }, [wishlists])
+  // useEffect(() => {
+  //   dispatch(fetchWishlist())
+  // }, [wishlists])
   
   return (
     <Container fluid>

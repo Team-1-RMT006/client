@@ -13,7 +13,7 @@ export default function CardEvent(props) {
   // useEffect(() => {
   //   dispatch(fetchWishlist())
   // }, [wishlists])
-  console.log(props.data)
+  console.log('inni props data >>>', props.data)
 
   function goDetail(id) {
     history.push(`event/${id}`)
