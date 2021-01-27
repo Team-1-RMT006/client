@@ -22,11 +22,12 @@ export default function Register() {
   const history = useHistory()
   
   const inputData = {
-    first_name: firstName.target.value,
+    first_name: target.firstName.value,
     last_name: lastName.target.value,
     email: email.target.value,
     password: password.target.value
   }
+
   console.log(firstName.target.value, '<<<<<<<<<')
   function handleRegister() {
     console.log(inputData)
