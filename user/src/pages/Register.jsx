@@ -48,7 +48,7 @@ export default function Register() {
           </div>
           <Container style={{ padding: '25px', width: '400px' }}>
             <h2><strong>Sign Up to Createvent</strong></h2><br />
-            <Button style={{
+            {/* <Button style={{
               width: '100%',
               height: '30px',
               color: 'whitesmoke',
@@ -56,7 +56,7 @@ export default function Register() {
               border: 'none'
             }}>
               Sign Up with Google
-              </Button><br /><br />
+              </Button><br /><br /> */}
             <hr />
             <Form onSubmit={handlerSubmit}>
               <Row>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Nav, Navbar, DropdownButton, Dropdown, Form, Row, Col, Card, CardDeck } from 'react-bootstrap'
-import NavbarMenu from '../component/NavbarMenu'
 import CardEvent from '../component/CardEvent'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTickets } from '../store/action/ticketAction'
@@ -24,8 +23,6 @@ export default function History() {
 
   return (
     <Container fluid>
-      <NavbarMenu />
-
       <div style={{ width: '1280px', height: '500px', backgroundColor: '#FFF5D5', alignItems: 'center', borderRadius: '5px', margin: '20px auto' }}>
         <div inline style={{ padding: '17px 35px' }}>
           <h1>History</h1><br />
