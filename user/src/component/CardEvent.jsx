@@ -3,6 +3,7 @@ import { Container, Card, Button, Row, Col } from 'react-bootstrap'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addWishlist, removeWishlist } from '../store/action/wishlistAction'
+import { updateCapacity, fetchEvents } from "../store/action/eventAction" 
 
 export default function CardEvent(props) {
   const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
@@ -12,6 +13,8 @@ export default function CardEvent(props) {
   const [showButton, setShowButton] = useState(true)
   const [local, setLocal] = useState(localStorage.getItem('access_token'))
   const temp = useSelector(state => state.userReducer.local)
+  const newEvents = useSelector(state => state.eventReducer.newEvents)
+
 
   useEffect(() => {
     setLocal(localStorage.getItem('access_token'))
@@ -32,6 +35,14 @@ export default function CardEvent(props) {
     }
   }, [wishlists])
 
+  useEffect(() => {
+    dispatch(fetchEvents())
+  }, [])
+
+  // useEffect(() => {
+  //   dispatch(updateCapacity())
+  // }, [])
+
   function goDetail(id) {
     history.push(`/event/${id}`)
   }
@@ -50,6 +61,7 @@ export default function CardEvent(props) {
 
   return (
       <Col lg={6}>
+        {JSON.stringify(newEvents)}
         <Card style={{ flexDirection: 'row', margin: 10, width: '600px', height: 145 }}>
           <Card.Img style={{ width: '125px' }} src={props.data.event_preview} />
           <Card.Body style={{width: 500}}>
@@ -68,6 +80,18 @@ export default function CardEvent(props) {
             {local &&
               (
                 <div>
+                  {
+                    newEvents.map(event => {
+                      return(
+                        <>
+                          <button onClick={(id) => dispatch(updateCapacity({
+                            id: event.id,
+                            value: event.capacity_regular - 1,
+                          }))}>Regular</button>
+                        </>
+                      )
+                    })
+                  }
                   <Button
                     onClick={() => goDetail(props.data.id)}
                     style={{
@@ -79,7 +103,7 @@ export default function CardEvent(props) {
                       border: 'none',
                       boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
                     }}>
-                    Detail
+                    Payment
                   </Button>
                   { (location.pathname === '/' && showButton) ?
                     (

@@ -1,6 +1,7 @@
 const initialState = {
   events: [],
-  loading: true
+  loading: true,
+  newEvents: []
 }
 
 function eventReducer(state = initialState, action) {
@@ -9,6 +10,21 @@ function eventReducer(state = initialState, action) {
       return { ...state, events: action.payload }
     case 'SET_LOADING_EVENT':
       return { ...state, loading: action.payload }
+    case "GET_EVENTS":
+      // console.log(action.tampData, "000");
+      return { ...state, newEvents: action.tampData }
+    case "UPDATE_EVENTS_REGULAR":
+      // console.log("ATUH ANJING");
+      const newValue = state.newEvents.map(event => {     
+        if(event.id === action.payload.id) { 
+          event.capacity_regular = action.payload.value
+          return event
+        }else {
+          return event
+        }
+      })
+      // console.log(acti);
+      return { ...state, newEvents: newValue }
     default:
       return state
   }
