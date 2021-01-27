@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Navbar, Nav, Button, Container } from 'react-bootstrap'
 import { useHistory, NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import {} from '../store/action/eventAction'
 
 export default function NavbarMenu() {
   const [local, setLocal] = useState(localStorage.getItem('access_token'))
@@ -12,6 +13,7 @@ export default function NavbarMenu() {
   function handleLogout() {
     localStorage.clear()
     setLocal('')
+    dispatch({ type: 'SET_LOADING_EVENT', payload: true })
     history.push('/')
   }
 
