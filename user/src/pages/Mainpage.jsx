@@ -12,8 +12,9 @@ import { useHistory } from "react-router-dom"
 export default function Mainpage() {
   const events = useSelector(state => state.eventReducer.events)
   const loading = useSelector(state => state.eventReducer.loading)
+  const banner = useSelector(state => state.bannerReducer.banner)
   // const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
-
+  console.log(banner)
 
   const dispatch = useDispatch()
   const history = useHistory()

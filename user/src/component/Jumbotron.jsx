@@ -1,5 +1,7 @@
 import React from 'react'
 import { Container, Carousel } from 'react-bootstrap'
+// import {useDispatch, useSelector} from 'react-redux'
+
 
 export default function Jumbotron() {
   return (
