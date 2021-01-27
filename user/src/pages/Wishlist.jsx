@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Row, Col, CardDeck } from 'react-bootstrap'
+import { Container, Row, CardDeck } from 'react-bootstrap'
 import CardWishlist from '../component/CardWishlist'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchWishlist } from '../store/action/wishlistAction'
