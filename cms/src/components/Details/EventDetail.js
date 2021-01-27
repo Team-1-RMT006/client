@@ -18,12 +18,13 @@ function EventDetail (){
         console.log(err);
       })
   }, [])
+  
   return (
     <div className="flex flex-col h-screen w-full bg-gray-900">
       {
         loading ? <Loader /> :
         <>
-          <div className="flex flex-row h-1/5">
+          <div className="flex flex-row h-1/4 p-2">
             <img 
               className="w-1/3"
               src={DetailEvent?.event_preview}
@@ -40,73 +41,25 @@ function EventDetail (){
                 <table className="relative w-full">
                   <thead>
                     <tr>
-                      <th className="sticky top-0 px-6 py-3 text-gray-100 bg-gray-600">Buyer</th>
+                      <th className="sticky top-0 px-6 py-3 text-gray-100 bg-gray-600">Customer ID</th>
                       <th className="sticky top-0 px-6 py-3 text-gray-100 bg-gray-600">Order</th>
-                      <th className="sticky top-0 px-6 py-3 text-gray-100 bg-gray-600">Transaction</th>
+                      <th className="sticky top-0 px-6 py-3 text-gray-100 bg-gray-600">Type</th>
                       <th className="sticky top-0 px-6 py-3 text-gray-100 bg-gray-600">Status</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y bg-red-100">
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                      <td className="px-6 py-4 text-center">Column</td>
-                    </tr>
+                    {
+                      DetailEvent.Tickets.map(ticket => {
+                        return (
+                          <tr key={ticket.id}>
+                            <td className="px-6 py-4 text-center">{ticket.CustomerId}</td>
+                            <td className="px-6 py-4 text-center">{new Date(ticket.createdAt).toString().split('GMT')[0]}</td>
+                            <td className="px-6 py-4 text-center">{ticket.class.toUpperCase()}</td>
+                            <td className="px-6 py-4 text-center">{ticket.status.toUpperCase()}</td>
+                          </tr>
+                        )
+                      })
+                    }
                   </tbody>
                 </table> : 
                 <div className="flex flex-col justify-center items-center w-full h-full bg-gray-600">

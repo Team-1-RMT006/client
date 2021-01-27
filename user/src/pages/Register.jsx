@@ -22,12 +22,12 @@ export default function Register() {
   const history = useHistory()
   
   const inputData = {
-    first_name: firstName.target.value,
-    last_name: lastName.target.value,
-    email: email.target.value,
-    password: password.target.value
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    password: password
   }
-  console.log(firstName.target.value, '<<<<<<<<<')
+  console.log(inputData, '<<<<<<<<<')
   function handleRegister() {
     console.log(inputData)
     registering(inputData)
@@ -86,23 +86,23 @@ export default function Register() {
                 <Col>
                   <Form.Group controlId='firstname'>
                     <Form.Label><strong>First Name</strong></Form.Label>
-                    <Form.Control type='firstname' onChange={e => setFirstName(e)} placeholder={"e.g Febrian"} />
+                    <Form.Control type='firstname' onChange={e => setFirstName(e.target.value)} placeholder={"e.g Febrian"} />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group controlId='formGroupLastName'>
                     <Form.Label><strong>Last Name</strong></Form.Label>
-                    <Form.Control type='lastname' onChange={e => setLastName(e)} placeholder={"e.g Aditya"} />
+                    <Form.Control type='lastname' onChange={e => setLastName(e.target.value)} placeholder={"e.g Aditya"} />
                   </Form.Group>
                 </Col>
               </Row>
               <Form.Group controlId='formGroupEmail'>
                 <Form.Label><strong>Email</strong></Form.Label>
-                <Form.Control type='email' onChange={e => setEmail(e)} placeholder={"febrian.aksen@mail.com"} />
+                <Form.Control type='email' onChange={e => setEmail(e.target.value)} placeholder={"febrian.aksen@mail.com"} />
               </Form.Group>
               <Form.Group controlId='formGroupPassword'>
                 <Form.Label><strong>Password</strong></Form.Label>
-                <Form.Control type='password' onChange={e => setPassword(e)} placeholder={"Please input min 7 character"} />
+                <Form.Control type='password' onChange={e => setPassword(e.target.value)} placeholder={"Please input min 7 character"} />
               </Form.Group>
               <br />
               <Button
