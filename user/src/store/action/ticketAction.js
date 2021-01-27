@@ -57,3 +57,32 @@ export function fetchTickets() {
       })
   }
 }
+
+export const fetchTicketById = (TicketId) => {
+  return (dispatch) => {
+    fetch(`http://localhost:3000/customer/ticket/${TicketId}`, {
+      headers: {
+        access_token: localStorage.getItem("access_token")
+      }
+    })
+      .then(handleResponse)
+      .then((data) => {
+        dispatch({
+          type: "eventDetail/setTicket",
+          ticket: data.results
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: "eventDetail/setTicketError",
+          ticketError: error
+        })
+      })
+      .finally(_ => {
+        dispatch({
+          type: "eventDetail/setTicketIsLoading",
+          ticketIsLoading: false
+        })
+      })
+  }
+}

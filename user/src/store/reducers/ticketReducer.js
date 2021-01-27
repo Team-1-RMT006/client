@@ -1,7 +1,10 @@
 const initialState = {
   tickets: [],
   ticketsIsLoading: true,
-  ticketsError: null
+  ticketsError: null,
+  ticket: {},
+  ticketIsLoading: true,
+  ticketError: null
 }
 
 function ticketReducer( state = initialState, action ) {
@@ -12,6 +15,12 @@ function ticketReducer( state = initialState, action ) {
       return { ...state, ticketsIsLoading: action.ticketsIsLoading }
     case 'history/setTicketsError':
       return { ...state, ticketsError: action.ticketsError }
+    case 'eventDetail/setTicket':
+      return { ...state, ticket: action.ticket }
+    case 'eventDetail/setTicketIsLoading':
+      return { ...state, ticketIsLoading: action.ticketIsLoading }
+    case 'eventDetail/setTicketError':
+      return { ...state, ticketError: action.ticketError }
     default:
       return state
   }

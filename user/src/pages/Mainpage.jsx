@@ -7,6 +7,7 @@ import FooterPage from '../component/FooterPage'
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchEvent} from '../store/action/eventAction'
 import {fetchWishlist} from '../store/action/wishlistAction'
+import { useHistory } from "react-router-dom"
 
 export default function Mainpage() {
   const events = useSelector(state => state.eventReducer.events)
@@ -15,6 +16,13 @@ export default function Mainpage() {
 
 
   const dispatch = useDispatch()
+  const history = useHistory()
+  
+  // useEffect(() => {
+  //   if(!localStorage.getItem("access_token")) {
+  //     history.push("/login")
+  //   }
+  // })
 
   useEffect(() => {
     if (loading) {
