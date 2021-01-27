@@ -1,10 +1,51 @@
-import React from 'react'
-import { Container } from 'react-bootstrap'
+import React from "react";
 
-export default function FooterPage() {
+// reactstrap components
+import { Row, Container } from "reactstrap";
+
+function DemoFooter() {
   return (
-    <Container style={{ alignItems: 'center', height: '10px' }}>
-      <h5 style={{ padding: '25px 35%', margin: '0 auto' }}>© 2021 <strong>Createvent</strong>. All Right Reserved </h5>
-    </Container>
-  )
+    <footer className="footer footer-black footer-white">
+      <Container>
+        <Row>
+          <nav className="footer-nav">
+            <ul>
+              <li>
+                <a
+                  href="https://www.creative-tim.com?ref=pkr-footer"
+                  target="_blank"
+                >
+                  Creative Tim
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://blog.creative-tim.com/?ref=pkr-footer"
+                  target="_blank"
+                >
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.creative-tim.com/license?ref=pkr-footer"
+                  target="_blank"
+                >
+                  Licenses
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div className="credits ml-auto">
+            <span className="copyright">
+              © {new Date().getFullYear()}, made with{" "}
+              <i className="fa fa-heart heart" /> by Createvent Team
+            </span>
+          </div>
+        </Row>
+      </Container>
+    </footer>
+  );
 }
+
+export default DemoFooter;

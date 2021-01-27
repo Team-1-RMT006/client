@@ -7,17 +7,16 @@ export const showBanner = () => {
       method: 'get',
       url
     })
-      .then(response => {
-        console.log(response, '------')
+    .then(response => {
         dispatch({
-          type: 'set_banner',
+          type: 'SET_BANNER',
           banner: response.data
         })
       })
       .catch(err => console.log(err))
       .finally(_ => {
         dispatch({
-          type: 'banner_loading',
+          type: 'BANNER_LOADING',
           bannerLoading: false
         })
       })
