@@ -1,26 +1,19 @@
+import axios from 'axios'
+
 export function addWishlist(id) {
   return (dispatch, getState) => {
-    fetch('http://localhost:3000/customer/wishlist', {
+    axios({
       method: 'POST',
+      url: 'http://localhost:3000/customer/wishlist',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
         'access_token': localStorage.getItem('access_token')
       },
-      body: JSON.stringify({
+      data: {
         EventId: id
-      })
+      }
     })
-      .then(async response => {
-        const data = await response.json()
-        if (!response.ok) {
-          const error = (data && data.message) || response.status
-          return Promise.reject(error)
-        }
-        return data
-      })
-      .then(data => {
-        dispatch(insertWishlist(data))
+      .then(response => {
+        dispatch(insertWishlist(response.data))
       })
       .catch(error => {
         console.log(error)
@@ -30,24 +23,15 @@ export function addWishlist(id) {
 
 export function removeWishlist(id) {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/customer/wishlist/${id}`, {
+    axios({
       method: 'DELETE',
+      url: `http://localhost:3000/customer/wishlist/${id}`,
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
         'access_token': localStorage.getItem('access_token')
       }
     })
-      .then(async response => {
-        const data = await response.json()
-        if (!response.ok) {
-          const error = (data && data.message) || response.status
-          return Promise.reject(error)
-        }
-        return data
-      })
-      .then(data => {
-        dispatch(dropWishlist(data))
+      .then(response => {
+        dispatch(dropWishlist(id))
       })
       .catch(error => {
         console.log(error)
@@ -65,24 +49,15 @@ export function dropWishlist(payload) {
 
 export function fetchWishlist() {
   return (dispatch, getState) => {
-    fetch('http://localhost:3000/customer/wishlist', {
+    axios({
       method: 'GET',
+      url: 'http://localhost:3000/customer/wishlist',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
         'access_token': localStorage.getItem('access_token')
       }
     })
-      .then(async response => {
-        const data = await response.json()
-        if (!response.ok) {
-          const error = (data && data.message) || response.status
-          return Promise.reject(error)
-        }
-        return data
-      })
-      .then(data => {
-        dispatch(setWishlist(data))
+      .then(response => {
+        dispatch(setWishlist(response.data))
       })
       .catch(error => {
         console.log(error)

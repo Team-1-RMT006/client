@@ -1,16 +1,14 @@
+import axios from 'axios'
+
 export function fetchEvent () {
   return (dispatch, getState) => {
-    fetch('http://localhost:3000/customer/eventactive')
-      .then(async response => {
-        const data = await response.json()
-        if (!response.ok) {
-          const error = (data && data.message) || response.status
-          return Promise.reject(error)
-        }
-        return data
+    axios({
+      methods: 'GET',
+      url: 'http://localhost:3000/customer/eventactive'
       })
-      .then(data => {
-        dispatch(setEvent(data))
+      .then(response => {
+        dispatch(setEvent(response.data))
+        dispatch(setLoading())
       })
       .catch(error => {
         console.log(error)
@@ -20,4 +18,8 @@ export function fetchEvent () {
 
 export function setEvent (payload) {
   return { type: 'GET_EVENT', payload }
+}
+
+export function setLoading() {
+  return { type: 'SET_LOADING_EVENT', payload: false }
 }
