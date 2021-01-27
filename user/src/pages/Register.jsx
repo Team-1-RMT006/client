@@ -8,16 +8,28 @@ import Swal from 'sweetalert2'
 
 export default function Register() {
   const statusRegister = useSelector(state => state.statusRegister)
-  const [inputData, setInputData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: ''
-  })
+  // const [inputData, setInputData] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   email: '',
+  //   password: ''
+  // })
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  // const [errorMsg, setErrorMsg] = useState([])
   const history = useHistory()
   
-
+  const inputData = {
+    first_name: firstName.target.value,
+    last_name: lastName.target.value,
+    email: email.target.value,
+    password: password.target.value
+  }
+  console.log(firstName.target.value, '<<<<<<<<<')
   function handleRegister() {
+    console.log(inputData)
     registering(inputData)
     .then(response => {
       Swal.fire('Your New Account Is Ready!');
@@ -26,10 +38,10 @@ export default function Register() {
     .catch(err => {
       console.log(`${err.response.data.message}`);
       Swal.fire(`${err.response.data.message}`)
+      // setErrorMsg(err.response.data.message)
     })
   }
 
-  console.log(inputData);
 
   const handlerSubmit = e => {
     e.preventDefault()
@@ -74,7 +86,7 @@ export default function Register() {
                 <Col>
                   <Form.Group controlId='firstname'>
                     <Form.Label><strong>First Name</strong></Form.Label>
-                    <Form.Control type='firstname' onChange={(e) => setInputData({...inputData, firstName: e.target.value})} placeholder={"e.g Febrian"} />
+                    <Form.Control type='firstname' onChange={e => setFirstName(e)} placeholder={"e.g Febrian"} />
                   </Form.Group>
                 </Col>
                 <Col>

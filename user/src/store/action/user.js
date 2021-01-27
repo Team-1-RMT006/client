@@ -16,13 +16,13 @@ export const userLogin = (payload) => {
         password: payload.password
       }
     })
-      
+
   }
 }
 
 export const userRegister = (payload) => {
   return (dispatch, getState) => {
-    // console.log(payload, "ini di user")
+    console.log(payload.firstName, "ini di user")
     axios({
       method: 'POST',
       url: url + '/register',
@@ -43,7 +43,8 @@ export const userRegister = (payload) => {
       })
       .catch(err => {
         console.log("--------")
-        // console.log(err.response.data.message)
+        console.log(err.response.data.message)
+        Swal.fire(`${err.response.data.message}`)
       })
   }
 }

@@ -30,7 +30,7 @@ export default function CardEventDetail(props) {
   const regTicket = 100
   const vipTicket = 1000
   const wipTicket = 10000
-  const statusTicket = 'paid'
+  const statusTicket = 'unpaid'
 
   return (
     <Container fluid>
