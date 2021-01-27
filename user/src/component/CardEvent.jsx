@@ -49,11 +49,10 @@ export default function CardEvent(props) {
   }
 
   return (
-    <Container>
-      <Col>
-        <Card style={{ flexDirection: 'row', margin: 10 }}>
+      <Col lg={6}>
+        <Card style={{ flexDirection: 'row', margin: 10, width: '600px', height: 145 }}>
           <Card.Img style={{ width: '125px' }} src={props.data.event_preview} />
-          <Card.Body style={{ width: 220 }}>
+          <Card.Body style={{width: 500}}>
             <h2><strong>{props.data.title}</strong></h2>
             <Card.Text>
               <h4>{props.data.location}</h4>
@@ -72,7 +71,7 @@ export default function CardEvent(props) {
                   <Button
                     onClick={() => goDetail(props.data.id)}
                     style={{
-                      margin: '20px 0px 0px 34px',
+                      margin: '28px 0px 0px 0px',
                       width: '150px',
                       height: '30px',
                       color: 'whitesmoke',
@@ -87,7 +86,7 @@ export default function CardEvent(props) {
                       <Button
                         onClick={handleAddWishlist}
                         style={{
-                          margin: '8px 0px 12px 34px',
+                          margin: '8px 0px 12px 0px',
                           width: '150px',
                           height: '30px',
                           color: 'whitesmoke',
@@ -102,7 +101,7 @@ export default function CardEvent(props) {
                       <Button
                         onClick={handleRemoveWishlist}
                         style={{
-                          margin: '8px 0px 12px 34px',
+                          margin: '8px 0px 12px 0px',
                           width: '150px',
                           height: '30px',
                           color: 'whitesmoke',
@@ -118,6 +117,5 @@ export default function CardEvent(props) {
           </Card.Footer>
         </Card>
       </Col>
-    </Container>
   )
 }

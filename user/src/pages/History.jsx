@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Nav, Navbar, DropdownButton, Dropdown, Form, Row, Col, Card, CardDeck } from 'react-bootstrap'
+import { Container, Form, Row, Col, CardDeck } from 'react-bootstrap'
 import CardEvent from '../component/CardEvent'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTickets } from '../store/action/ticketAction'
@@ -25,15 +25,15 @@ export default function History() {
     <Container fluid>
       <div style={{ width: '1280px', height: '500px', backgroundColor: '#FFF5D5', alignItems: 'center', borderRadius: '5px', margin: '20px auto' }}>
         <div inline style={{ padding: '17px 35px' }}>
-          <h1><strong>Tickets</strong></h1><br />
+          <h1><strong>Tickets</strong></h1>
+          <hr /><br/>
           <Form className='mr-auto'>
             <Form.Control style={{ width: '500px' }} type="text" placeholder="Search" />
           </Form>
         </div>
-
         <Row>
           <CardDeck style={{ margin: '0px 17px' }}>
-            {tickets.map(ticket => <Col lg={6} className='p-3'><CardEvent data={ticket} key={ticket.id}/></Col>)}
+            {tickets.map(ticket => <Col lg={6} className='p-3'><CardEvent data={ticket} key={ticket.id} /></Col>)}
           </CardDeck>
         </Row>
       </div>

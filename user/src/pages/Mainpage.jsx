@@ -54,13 +54,11 @@ export default function Mainpage() {
           <hr />
         </div>
         <Row>
-          <Col>
             <CardDeck style={{ margin: '15px 12px' }}>
               {events.map(event => {
                 return <CardEvent data={event} key={event.id} />
               })}
             </CardDeck>
-          </Col>
         </Row>
       </div>
       <FooterPage />

@@ -13,7 +13,6 @@ export default function CardEvent(props) {
   // useEffect(() => {
   //   dispatch(fetchWishlist())
   // }, [wishlists])
-  console.log(props.data)
 
   function goDetail(id) {
     history.push(`event/${id}`)

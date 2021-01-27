@@ -8,8 +8,13 @@ export default function CardEventDetail(props) {
   // const handleClose = () => setShow(false)
   // const handleShow = () => setShow(true)
 
-  function goHistory() {
-    history.push('/history');
+  // function goHistory() {
+  //   history.push('/history');
+  // }
+
+  const sendToMyTicket = () => {
+    // kirim data ticket ke redux dan pindah page ke home
+    history.push('/')
   }
 
   if (!props.ticket) {
@@ -129,7 +134,7 @@ export default function CardEventDetail(props) {
                     Pay Now
                   </Button> :
                   <Button
-                    // onClick={handleShow}
+                    onClick={sendToMyTicket}
                     type='submit'
                     style={{
                       margin: 5,
