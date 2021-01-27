@@ -43,7 +43,7 @@ export const userRegister = (payload) => {
       })
       .catch(err => {
         console.log("--------")
-        console.log(err.response.data.message)
+        // console.log(err.response.data.message)
       })
   }
 }

@@ -3,26 +3,37 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { userRegister } from '../store/action/user'
+import {registering} from '../hooks/apiRequest'
+import Swal from 'sweetalert2'
 
 export default function Register() {
   const statusRegister = useSelector(state => state.statusRegister)
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [inputData, setInputData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  })
   const history = useHistory()
-  const dispatch = useDispatch()
-    
+  
+
+  function handleRegister() {
+    registering(inputData)
+    .then(response => {
+      Swal.fire('Your New Account Is Ready!');
+      history.push('/login');
+    })
+    .catch(err => {
+      console.log(`${err.response.data.message}`);
+      Swal.fire(`${err.response.data.message}`)
+    })
+  }
+
+  console.log(inputData);
+
   const handlerSubmit = e => {
     e.preventDefault()
-    const payload = {
-      firstName: firstName.target.value,
-      lastName: lastName.target.value,
-      email: email.target.value,
-      password: password.target.value
-    }
-    dispatch(userRegister(payload))
+    handleRegister()
   }
   
   useEffect(() => {
@@ -63,23 +74,23 @@ export default function Register() {
                 <Col>
                   <Form.Group controlId='firstname'>
                     <Form.Label><strong>First Name</strong></Form.Label>
-                    <Form.Control type='firstname' onChange={(e) => setFirstName(e)} placeholder={"e.g Febrian"} />
+                    <Form.Control type='firstname' onChange={(e) => setInputData({...inputData, firstName: e.target.value})} placeholder={"e.g Febrian"} />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group controlId='formGroupLastName'>
                     <Form.Label><strong>Last Name</strong></Form.Label>
-                    <Form.Control type='lastname' onChange={e => setLastName(e)} placeholder={"e.g Aditya"} />
+                    <Form.Control type='lastname' onChange={e => setInputData({...inputData, lasName: e.target.value})} placeholder={"e.g Aditya"} />
                   </Form.Group>
                 </Col>
               </Row>
               <Form.Group controlId='formGroupEmail'>
                 <Form.Label><strong>Email</strong></Form.Label>
-                <Form.Control type='email' onChange={e => setEmail(e)} placeholder={"febrian.aksen@mail.com"} />
+                <Form.Control type='email' onChange={e => setInputData({...inputData, email: e.target.value})} placeholder={"febrian.aksen@mail.com"} />
               </Form.Group>
               <Form.Group controlId='formGroupPassword'>
                 <Form.Label><strong>Password</strong></Form.Label>
-                <Form.Control type='password' onChange={e => setPassword(e)} placeholder={"Please input min 7 character"} />
+                <Form.Control type='password' onChange={e => setInputData({...inputData, password: e.target.value})} placeholder={"Please input min 7 character"} />
               </Form.Group>
               <br />
               <Button
