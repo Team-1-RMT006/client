@@ -10,6 +10,12 @@ export default function CardEvent(props) {
   const location = useLocation()
   const dispatch = useDispatch()
   const [showButton, setShowButton] = useState(true)
+  const [local, setLocal] = useState(localStorage.getItem('access_token'))
+  const temp = useSelector(state => state.userReducer.local)
+
+  useEffect(() => {
+    setLocal(localStorage.getItem('access_token'))
+  }, [temp])
 
   useEffect(() => {
     let isWishlist = false
@@ -26,7 +32,7 @@ export default function CardEvent(props) {
   }, [wishlists])
 
   function goDetail(id) {
-    history.push(`event/${id}`)
+    history.push(`/event/${id}`)
   }
 
   function handleAddWishlist() {
@@ -52,50 +58,55 @@ export default function CardEvent(props) {
           </Card.Text>
         </Card.Body>
         <Card.Footer style={{ width: '200px' }}>
-          <Button
-            onClick={() => goDetail(props.data.id)}
-            style={{
-              margin: '20px 0px 0px 34px',
-              width: '100px',
-              height: '30px',
-              color: 'whitesmoke',
-              backgroundColor: '#F2C94C',
-              border: 'none',
-              boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
-            }}>
-            Detail
-        </Button>
-        { (location.pathname === '/' && showButton) ?
-        (
-          <Button
-            onClick={handleAddWishlist}
-            style={{
-              margin: '8px 0px 12px 34px',
-              width: '100px',
-              height: '30px',
-              color: 'whitesmoke',
-              backgroundColor: '#F2C94C',
-              border: 'none',
-              boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
-            }}>
-            Add to Wishlist
+          { local &&
+          (
+            <div>
+            <Button
+              onClick={() => goDetail(props.data.id)}
+              style={{
+                margin: '20px 0px 0px 34px',
+                width: '100px',
+                height: '30px',
+                color: 'whitesmoke',
+                backgroundColor: '#F2C94C',
+                border: 'none',
+                boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
+              }}>
+              Detail
           </Button>
-        ) :
-        (
-          <Button
-            onClick={handleRemoveWishlist}
-            style={{
-              margin: '8px 0px 12px 34px',
-              width: '100px',
-              height: '30px',
-              color: 'whitesmoke',
-              backgroundColor: '#F2C94C',
-              border: 'none',
-              boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
-            }}>
-            Remove from Wishlist
-          </Button>
-        )}
+          { (location.pathname === '/' && showButton) ?
+          (
+            <Button
+              onClick={handleAddWishlist}
+              style={{
+                margin: '8px 0px 12px 34px',
+                width: '100px',
+                height: '30px',
+                color: 'whitesmoke',
+                backgroundColor: '#F2C94C',
+                border: 'none',
+                boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
+              }}>
+              Add to Wishlist
+            </Button>
+          ) :
+          (
+            <Button
+              onClick={handleRemoveWishlist}
+              style={{
+                margin: '8px 0px 12px 34px',
+                width: '100px',
+                height: '30px',
+                color: 'whitesmoke',
+                backgroundColor: '#F2C94C',
+                border: 'none',
+                boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
+              }}>
+              Remove from Wishlist
+            </Button>
+          )}
+          </div>
+          )}
         </Card.Footer>
       </Card>
     </Container>

@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar, Nav, Button, Container } from 'react-bootstrap'
 import { useHistory, NavLink } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function NavbarMenu() {
-  const [local, setLocal] = useState(localStorage.getItem("access_token"))
+  const [local, setLocal] = useState(localStorage.getItem('access_token'))
+  const temp = useSelector(state => state.userReducer.local)
   const history = useHistory()
+  const dispatch = useDispatch()
 
   function handleLogout() {
     localStorage.clear()
+    setLocal('')
     history.push('/')
   }
+
+  useEffect(() => {
+    setLocal(localStorage.getItem('access_token'))
+  }, [temp])
 
   function handleLogin() {
     history.push('/login')

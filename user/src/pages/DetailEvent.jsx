@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
-import NavbarMenu from '../component/NavbarMenu'
 import CardEventDetail from '../component/CardEventDetail'
 import { fetchTicketById } from '../store/action/ticketAction'
 import { useSelector, useDispatch } from 'react-redux'
@@ -17,14 +16,13 @@ export default function DetailEvent() {
 
   useEffect(() => {
     dispatch(fetchTicketById(TicketId))
-  })
+  }, [])
 
   if (ticketIsLoading) {
     return <h1>Loading ...</h1>
   }
   return (
     <Container fluid>
-      <NavbarMenu />
       <CardEventDetail ticket={ticket}/>
     </Container>
   )

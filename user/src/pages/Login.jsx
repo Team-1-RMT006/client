@@ -24,10 +24,11 @@ export default function Login() {
       password: password.target.value
     }
     dispatch(userLogin(inputData))
-    .then(res => (
-      localStorage.setItem("access_token", res.data.access_token),
+    .then(res => {
+      localStorage.setItem("access_token", res.data.access_token)
+      dispatch({ type: 'SET_LOCAL', payload: res.data.access_token })
       history.push("/")
-    ))
+    })
     .catch(err => {
       // console.log(err);
       console.log("--------")
@@ -49,7 +50,7 @@ export default function Login() {
           </div>
           <Container style={{ padding: '25px', width: '400px' }}>
             <h2><strong>Sign In to Createvent</strong></h2><br />
-            <Button
+            {/* <Button
               style={{
                 width: '100%',
                 height: '30px',
@@ -59,7 +60,7 @@ export default function Login() {
               }}
             >
               Sign In with Google
-              </Button><br /><br />
+              </Button><br /><br /> */}
             <hr />
             <Form onSubmit={submitHandler}>
               <Form.Group controlId='email'>
