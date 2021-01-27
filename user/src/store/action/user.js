@@ -1,8 +1,7 @@
 import axios from 'axios'
-// import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
-const url = 'http://localhost:4000/customer'
-// const history = useHistory()
+const url = 'http://localhost:3000/customer'
+
 
 
 export const userLogin = (payload) => {
@@ -34,6 +33,7 @@ export const userRegister = (payload) => {
       }
     })
       .then((_) => {
+        console.log("tesasssssss");
         Swal.fire('Success to Register')
         // console.log("berhasil")
         dispatch({
@@ -43,7 +43,7 @@ export const userRegister = (payload) => {
       })
       .catch(err => {
         console.log("--------")
-        console.log(err.response.data.message)
+        console.log(err)
       })
   }
 }

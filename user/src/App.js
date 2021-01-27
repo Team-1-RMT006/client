@@ -2,10 +2,12 @@ import React, { createContext, useContext, useEffect } from 'react'
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { Login, Register, Wishlist, History, DetailEvent, Mainpage } from './pages/Index'
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 import store from './store'
 import NavbarMenu from './component/NavbarMenu'
 
-
+toast.configure()
 export default function App() {
   const access_token = localStorage.getItem('access_token');
 

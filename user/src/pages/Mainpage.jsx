@@ -16,11 +16,11 @@ export default function Mainpage() {
   const dispatch = useDispatch()
   const history = useHistory()
   
-  // useEffect(() => {
-  //   if(!localStorage.getItem("access_token")) {
-  //     history.push("/login")
-  //   }
-  // })
+  useEffect(() => {
+    if(!localStorage.getItem("access_token")) {
+      history.push("/login")
+    }
+  })
 
   useEffect(() => {
     dispatch(fetchEvent())

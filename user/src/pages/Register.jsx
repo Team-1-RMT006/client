@@ -22,15 +22,19 @@ export default function Register() {
       email: email.target.value,
       password: password.target.value
     }
+    // console.log((payload));
     dispatch(userRegister(payload))
+    //   .then(data => {
+
+    //   })
   }
   
   useEffect(() => {
     if(statusRegister.statusRegister) {
-      console.log(statusRegister, "ini atas")
+      // console.log(statusRegister, "ini atas")
       history.push("/login")
     }else {
-      console.log(statusRegister);
+      // console.log(statusRegister);
     }
   }, [statusRegister])
 
@@ -63,13 +67,13 @@ export default function Register() {
                 <Col>
                   <Form.Group controlId='firstname'>
                     <Form.Label><strong>First Name</strong></Form.Label>
-                    <Form.Control type='firstname' onChange={(e) => setFirstName(e)} placeholder={"e.g Febrian"} />
+                    <Form.Control type='firstname' onChange={(e) => setFirstName(e)} placeholder={"e.g Jhon"} />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group controlId='formGroupLastName'>
                     <Form.Label><strong>Last Name</strong></Form.Label>
-                    <Form.Control type='lastname' onChange={e => setLastName(e)} placeholder={"e.g Aditya"} />
+                    <Form.Control type='lastname' onChange={e => setLastName(e)} placeholder={"e.g Doe"} />
                   </Form.Group>
                 </Col>
               </Row>
