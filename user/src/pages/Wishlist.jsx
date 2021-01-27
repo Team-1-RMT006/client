@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col, CardDeck } from 'react-bootstrap'
 import NavbarMenu from '../component/NavbarMenu'
-import CardEvent from '../component/CardEvent'
-import { useSelector } from 'react-redux'
+import CardWishlist from '../component/CardWishlist'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchWishlist } from '../store/action/wishlistAction'
+
 
 export default function Wishlist() {
   const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchWishlist())
+  }, [wishlists])
   
   return (
     <Container fluid>
@@ -19,7 +26,7 @@ export default function Wishlist() {
           <CardDeck style={{ margin: '0px 24px' }}>
             <Col lg={6} className='p-3'>
               { wishlists.map(wishlist => {
-                return <CardEvent data={wishlist} key={wishlist.id} />
+                return <CardWishlist data={wishlist} key={wishlist.id} />
               })}
             </Col>
           </CardDeck>

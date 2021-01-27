@@ -11,7 +11,9 @@ import { useHistory } from "react-router-dom"
 
 export default function Mainpage() {
   const events = useSelector(state => state.eventReducer.events)
-  const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
+  const loading = useSelector(state => state.eventReducer.loading)
+  // const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
+
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -23,9 +25,15 @@ export default function Mainpage() {
   // })
 
   useEffect(() => {
-    dispatch(fetchEvent())
-    dispatch(fetchWishlist())
-  }, [])
+    if (loading) {
+      dispatch(fetchEvent())
+      dispatch(fetchWishlist())
+    }
+  }, [events, loading])
+
+  if (loading) {
+    return (<h1>Loading.....</h1>)
+  }
 
   return (
     <Container fluid>

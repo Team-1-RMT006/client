@@ -2,43 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { Container, Card, Button } from 'react-bootstrap'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addWishlist, removeWishlist } from '../store/action/wishlistAction'
+import { fetchWishlist, removeWishlist } from '../store/action/wishlistAction'
 
 export default function CardEvent(props) {
-  const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
+  // const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
   const history = useHistory()
   const location = useLocation()
   const dispatch = useDispatch()
-  const [showButton, setShowButton] = useState(true)
 
-  useEffect(() => {
-    let isWishlist = false
-    for (let i = 0; i < wishlists.length; i++) {
-      if (wishlists[i].EventId === props.data.id) {
-        isWishlist = true
-      }
-    }
-    if (isWishlist) {
-      setShowButton(false) // remove button
-    } else {
-      setShowButton(true) // add button
-    }
-  }, [wishlists])
+  // useEffect(() => {
+  //   dispatch(fetchWishlist())
+  // }, [wishlists])
 
   function goDetail(id) {
     history.push(`event/${id}`)
   }
 
-  function handleAddWishlist() {
-    dispatch(addWishlist(props.data.id))
-  }
-
   function handleRemoveWishlist() {
-    for (let i = 0; i < wishlists.length; i++) {
-      if (wishlists[i].EventId === props.data.id) {
-        dispatch(removeWishlist(wishlists[i].id))
-      }
-    }
+    console.log('nihhhh >>>>>', props.data.id)
+    dispatch(removeWishlist(props.data.id))
   }
 
   return (
@@ -65,24 +47,7 @@ export default function CardEvent(props) {
             }}>
             Detail
         </Button>
-        { (location.pathname === '/' && showButton) ?
-        (
-          <Button
-            onClick={handleAddWishlist}
-            style={{
-              margin: '8px 0px 12px 34px',
-              width: '100px',
-              height: '30px',
-              color: 'whitesmoke',
-              backgroundColor: '#F2C94C',
-              border: 'none',
-              boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
-            }}>
-            Add to Wishlist
-          </Button>
-        ) :
-        (
-          <Button
+        <Button
             onClick={handleRemoveWishlist}
             style={{
               margin: '8px 0px 12px 34px',
@@ -95,7 +60,6 @@ export default function CardEvent(props) {
             }}>
             Remove from Wishlist
           </Button>
-        )}
         </Card.Footer>
       </Card>
     </Container>

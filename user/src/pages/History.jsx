@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Nav, Navbar, DropdownButton, Dropdown, Form, Row, Col, Card, CardDeck } from 'react-bootstrap'
 import NavbarMenu from '../component/NavbarMenu'
 import CardEvent from '../component/CardEvent'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchTickets } from '../store/action/ticketAction'
 
 
@@ -12,9 +12,11 @@ export default function History() {
   const ticketsIsLoading = useSelector(state => state.ticketReducer.ticketsIsLoading);
   const ticketsError = useSelector(state => state.ticketReducer.ticketsError);
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    fetchTickets()
-  })
+    dispatch(fetchTickets())
+  }, [])
 
   if (ticketsIsLoading) {
     return <h1>Loading ... </h1>
