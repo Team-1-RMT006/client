@@ -62,7 +62,7 @@ export const fetchTicketById = (TicketId) => {
   return (dispatch, getState) => {
     console.log(localStorage.getItem('access_token'))
     axios({
-      url: `http://localhost:3000/customer/events/${TicketId}`,
+      url: `http://localhost:3000/customer/ticket/${TicketId}`,
       method: 'GET',
       headers: {
         access_token: localStorage.getItem("access_token")
@@ -73,6 +73,10 @@ export const fetchTicketById = (TicketId) => {
         dispatch({
           type: "eventDetail/setTicket",
           ticket: response.data
+        })
+        dispatch({
+          type: 'SET_TICKET_ID',
+          TicketId
         })
       })
       .catch((error) => {
@@ -113,6 +117,6 @@ export const fetchTicketById = (TicketId) => {
     //       ticketIsLoading: false
     //     })
     //   })
-  
+
   }
 }

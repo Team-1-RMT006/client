@@ -10,6 +10,7 @@ import { fetchWishlist } from '../store/action/wishlistAction'
 import { useHistory } from "react-router-dom"
 import { showBanner } from '../store/action/bannerAction'
 
+
 export default function Mainpage() {
   const events = useSelector(state => state.eventReducer.events)
   const loading = useSelector(state => state.eventReducer.loading)
@@ -30,9 +31,8 @@ export default function Mainpage() {
   }
   return (
     <Container fluid>
-      {JSON.stringify(events)}
       <LandingPageHeader />
-      <Container>
+      <Container fluid>
         <Carousel>
           {banner.map(el => {
             return (
@@ -55,15 +55,14 @@ export default function Mainpage() {
       <div
         style={{
           width: '1280px',
-          height: '500px',
-          backgroundColor: '#0FF5D5',
+          backgroundColor: '#FFF4EB',
           alignItems: 'center',
           borderRadius: '10px',
           margin: '0 auto'
         }}
       >
         <div style={{ padding: '22px 42px 0px 42px' }}>
-          <h1>Event</h1>
+          <h1 className='h1'>Event</h1>
           <hr />
         </div>
         <Row>

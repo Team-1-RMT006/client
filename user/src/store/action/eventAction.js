@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-export function fetchEvent () {
+export function fetchEvent() {
   return (dispatch, getState) => {
     axios({
       methods: 'GET',
       url: 'http://localhost:3000/customer/eventactive'
-      })
+    })
       .then(response => {
         dispatch(setEvent(response.data))
         dispatch(setLoading())
@@ -17,7 +17,7 @@ export function fetchEvent () {
 }
 
 export function fetchEvents() {
-  return(dispatch, getState) => {
+  return (dispatch, getState) => {
     axios({
       method: "GET",
       url: "http://localhost:3000/customer/eventactive",
@@ -36,7 +36,7 @@ export function fetchEvents() {
   }
 }
 
-export function setEvent (payload) {
+export function setEvent(payload) {
   return { type: 'GET_EVENT', payload }
 }
 
@@ -44,16 +44,11 @@ export function setLoading() {
   return { type: 'SET_LOADING_EVENT', payload: false }
 }
 
-export function updateCapacity(payload) {
-  // console.log("I LOVE YOU");
-  return { type: "UPDATE_EVENTS_REGULAR", payload }
-}
-
-export function fetchEventById(TicketId) {
+export function fetchEventById(EventId) {
   return (dispatch, getState) => {
-    console.log(localStorage.getItem('access_token'))
+    // console.log(TicketId, 'ini ticketid')
     axios({
-      url: `http://localhost:3000/customer/events/${TicketId}`,
+      url: `http://localhost:3000/customer/events/${EventId}`,
       method: 'GET',
       headers: {
         access_token: localStorage.getItem("access_token")
@@ -64,7 +59,13 @@ export function fetchEventById(TicketId) {
         dispatch({
           type: "SET_DETAIL_EVENT",
           payload: response.data
+
         })
+        // dispatch({
+        //   type: 'SET_TICKET_ID',
+        //   // EventId
+        // })
+
       })
       .catch((error) => {
         console.log(error)
@@ -75,5 +76,24 @@ export function fetchEventById(TicketId) {
           loading: false
         })
       })
-    }
   }
+}
+
+export function updateCapacity(payload) {
+  console.log(payload, "I LOVE YOU")
+  return { type: "UPDATE_EVENTS_REGULAR", payload }
+}
+
+export function updateCapacityVvip(payload) {
+  console.log(payload, "I LOVE YOU")
+  return { type: "UPDATE_EVENTS_VVIP", payload }
+}
+
+export function updateCapacityVip(payload) {
+  console.log(payload, "I LOVE YOU")
+  return { type: "UPDATE_EVENTS_VIP", payload }
+}
+
+export function setTicketId(payload) {
+  return { type: "SET_TICKET_ID", payload }
+}

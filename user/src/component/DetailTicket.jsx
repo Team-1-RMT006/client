@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Card, CardGroup, Form, Row, Col } from 'react-bootstrap'
+import { Container, Card, CardGroup, Form, Row, Col, Button } from 'react-bootstrap'
 import { useParams, useHistory } from 'react-router-dom'
-import { updateCapacity, updateCapacityVip, updateCapacityVvip, fetchEventById, fetchEvents } from "../store/action/eventAction"
+import { updateCapacity, updateCapacityVip, updateCapacityVvip } from "../store/action/eventAction"
+import { fetchTickets, fetchTicketById } from '../store/action/ticketAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { payment, realPayment } from '../hooks/apiRequest'
-import Swal from 'sweetalert2'
 import { useLocation } from 'react-router-dom'
-import { Button } from 'reactstrap'
+import Swal from 'sweetalert2'
 
-export default function CardEventDetail(props) {
+export default function DetailTicket(props) {
 
   const history = useHistory();
   const params = useParams()
@@ -22,71 +22,15 @@ export default function CardEventDetail(props) {
     dispatch(realPayment())
   }
 
-  const handleShow = (e) => {
-    e.preventDefault()
-    let className = null
-    let price = null
-
-    if (selected === '1') {
-      className = "regular"
-      price = detailEvent.price_regular
-      dispatch(updateCapacity({
-        id: detailEvent.id,
-        value: detailEvent.capacity_regular - 1
-      }))
-    } else
-      if (selected === "2") {
-        className = "vip"
-        price = detailEvent.price_vip
-        dispatch(updateCapacityVip({
-          id: detailEvent.id,
-          value: detailEvent.capacity_vip - 1
-        }))
-      } else if (selected === "3") {
-        className = "vvip"
-        price = detailEvent.price_vvip
-        dispatch(updateCapacityVvip({
-          id: detailEvent.id,
-          value: detailEvent.capacity_vvip - 1
-        }))
-      }
-
-    let inputData = {
-      class: className,
-      EventId: detailEvent.id,
-      seat: "a01",
-      price,
-
-    }
-    payment(inputData)
-      .then(data => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Transaction succesed',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      })
-      .catch(err => {
-        console.log(err, '<<<<< error payment');
-      })
-    history.push('/history')
-  }
-
-
-
-
   const sendToMyTicket = () => {
     // kirim data ticket ke redux dan pindah page ke home
     history.push('/')
   }
 
   useEffect(() => {
-    dispatch(fetchEventById(params.id))
-    console.log(params.id, '<<<params')
-    dispatch(fetchEvents())
+    dispatch(fetchTicketById(params.id))
+    dispatch(fetchTickets())
   }, [])
-  console.log(detailEvent, 'detailEvent')
 
   if (!props.ticket) {
     return <h1>Loading ...</h1>
@@ -105,7 +49,6 @@ export default function CardEventDetail(props) {
 
   return (
     <Container fluid>
-      {/* {JSON.stringify(detailEvent)} */}
       {/* <Button
         onClick={goHistory}
         style={{
@@ -120,13 +63,12 @@ export default function CardEventDetail(props) {
           </Button> */}
 
       <CardGroup className="m-4 d-block">
-        <Card className="m-3 border-0 shadow" style={{
-          backgroundColor: '#FFF4EB',
+        <Card className="m-5 border-0 shadow" style={{
+          backgroundColor: '#FFF5D5',
           borderRadius: 10,
           padding: '3rem'
         }}>
           <h1><strong>Detail Event</strong></h1>
-          <hr />
           <Row>
             <Col>
               {
@@ -185,14 +127,25 @@ export default function CardEventDetail(props) {
                       }} defaultValue="Choose...">
                         <option> - Choose Ticket - </option>
                         {
-                          detailEvent?.capacity_regular ? <option value='1'>Regular: {detailEvent.price_regular}</option> : ''
+                          detailEvent.capacity_regular ? <option value='1'>Regular: {detailEvent.price_regular}</option> : ''
                         }
                         {
-                          detailEvent?.capacity_vip ? <option value='2' >VIP: {detailEvent.price_vip}</option> : ''
+                          detailEvent.capacity_vip ? <option value='2' >VIP: {detailEvent.price_vip}</option> : ''
                         }
                         {
-                          detailEvent?.capacity_vvip ? <option value='3'>VVIP: {detailEvent.price_vvip}</option> : ''
+                          detailEvent.capacity_vvip ? <option value='3'>VVIP: {detailEvent.price_vvip}</option> : ''
                         }
+                        {
+                          // newEvents.map(event => {
+                          // return (
+                          // <option onSelect={(id) => dispatch(updateCapacity({
+                          //   id: .id,
+                          //   value: id.capacity_regular - 1,
+                          // }))}>Regular</option>
+                          //   )
+                          // })
+                        }
+
                       </Form.Control>
                     </Form.Group>
                   }
@@ -214,28 +167,30 @@ export default function CardEventDetail(props) {
                     )
                   })
                 } */}
-                <Button
-                  onClick={handleShow}
-                  type='submit'
-                  color='danger'
-                  style={{
-                    marginRight: 5,
-                    width: 100,
-                    height: 30,
-                    color: 'whitesmoke',
-                    border: 'none'
-                  }}
-                >
-                  Book
-                  </Button>
+                {(statusTicket === 'unpaid') &&
+                  <Button
+                    onClick={buttonPayment}
+                    type='submit'
+                    style={{
+                      margin: 5,
+                      width: 100,
+                      height: 30,
+                      color: 'whitesmoke',
+                      backgroundColor: '#F2C94C',
+                      border: 'none'
+                    }}
+                  >
+                    Pay Now
+                  </Button>}
+
                 <Button
                   onClick={goHome}
-                  color='danger'
                   style={{
                     margin: 5,
                     width: 100,
                     height: 30,
                     color: 'whitesmoke',
+                    backgroundColor: '#F2C94C',
                     border: 'none'
                   }}
                 >

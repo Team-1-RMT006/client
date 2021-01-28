@@ -27,30 +27,30 @@ function LandingPageHeader() {
         className="page-header section-dark"
         style={{
           backgroundImage:
-            "url(" + require("assets/img/antoine-barres.jpg") + ")",
+            "url(" + require("assets/img/concert.jpg").default + ")",
         }}
       >
         <div className="filter" />
         <div className="content-center">
           <Container>
             <div className="title-brand">
-              <h1 className="presentation-title">Createvent</h1>
-              <div className="fog-low">
-                <img alt="..." src={require("assets/img/fog-low.png")} />
+              <h1 className="presentation-title">Creativent</h1>
+              {/* <div className="fog-low">
+                <img alt="..." src={require("../assets/img/fog-low.png").default} />
               </div>
               <div className="fog-low right">
-                <img alt="..." src={require("assets/img/fog-low.png")} />
-              </div>
+                <img alt="..." src={require("../assets/img/fog-low.png").default} />
+              </div> */}
             </div>
-            <h2 className="presentation-subtitle text-center">
+            <h5 className="presentation-subtitle text-center">
             Creativent is where event organizers and event lovers meet. Book your tickets and enjoy secured transaction. Managing your events has never been this easy. Scan your code and have fun!!
-            </h2>
+            </h5>
           </Container>
         </div>
         <div
           className="moving-clouds"
           style={{
-            backgroundImage: "url(" + require("assets/img/clouds.png") + ")",
+            backgroundImage: "url(" + require("assets/img/clouds.png").default + ")",
           }}
         />
       </div>
