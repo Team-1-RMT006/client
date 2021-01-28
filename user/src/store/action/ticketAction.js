@@ -22,12 +22,12 @@ import axios from 'axios'
 //           ticketsError: error
 //         })
 //       })
-      // .finally(_ => {
-      //   dispatch({
-      //     type: "history/setTicketsIsLoading",
-      //     ticketsIsLoading: false
-      //   })
-      // })
+// .finally(_ => {
+//   dispatch({
+//     type: "history/setTicketsIsLoading",
+//     ticketsIsLoading: false
+//   })
+// })
 //   }
 // }
 
@@ -60,8 +60,9 @@ export function fetchTickets() {
 
 export const fetchTicketById = (TicketId) => {
   return (dispatch, getState) => {
+    console.log(localStorage.getItem('access_token'))
     axios({
-      url:`http://localhost:3000/customer/ticket/${TicketId}`,
+      url: `http://localhost:3000/customer/events/${TicketId}`,
       method: 'GET',
       headers: {
         access_token: localStorage.getItem("access_token")
@@ -75,6 +76,7 @@ export const fetchTicketById = (TicketId) => {
         })
       })
       .catch((error) => {
+        console.log(error)
         dispatch({
           type: "eventDetail/setTicketError",
           ticketError: error
@@ -111,5 +113,6 @@ export const fetchTicketById = (TicketId) => {
     //       ticketIsLoading: false
     //     })
     //   })
+  
   }
 }

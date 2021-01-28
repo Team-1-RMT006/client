@@ -9,7 +9,7 @@ import NavbarMenu from './component/NavbarMenu'
 export default function App() {
   const access_token = localStorage.getItem('access_token');
 
-  if(access_token) {
+  if (access_token) {
 
   }
 
@@ -17,6 +17,9 @@ export default function App() {
     <Provider store={store}>
       <NavbarMenu />
       <Switch>
+        <Route path='/event/:id'>
+          <DetailEvent />
+        </Route>
         <Route exact path='/'>
           <Mainpage />
         </Route>
@@ -31,9 +34,6 @@ export default function App() {
         </Route>
         <Route path='/wishlist'>
           <Wishlist />
-        </Route>
-        <Route path='/event/:id'>
-          <DetailEvent />
         </Route>
       </Switch>
     </Provider>

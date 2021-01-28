@@ -1,21 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Card, CardGroup, Form, Row, Col, Button, Modal } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
+import { updateCapacity, fetchEventById, fetchEvents } from "../store/action/eventAction"
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function CardEventDetail(props) {
   const history = useHistory();
+  const params = useParams()
+  const [selected, setSelected] = useState()
+  const dispatch = useDispatch()
+  const detailEvent = useSelector(state => state.eventReducer.detailEvent)
+  const newEvents = useSelector(state => state.eventReducer.newEvents)
+  // console.log('newEvents: ', newEvents);
   // const [show, setShow] = useState(false)
   // const handleClose = () => setShow(false)
-  // const handleShow = () => setShow(true)
+  const handleShow = (e) => {
+    e.preventDefault()
+    if (selected === 'regular') {
+      dispatch(updateCapacity({
+        id: detailEvent.id,
+        value: detailEvent.capacity_regular
+      }))
+    }
+    console.log(detailEvent.id)
+    console.log(newEvents)
+  }
 
   // function goHistory() {
   //   history.push('/history');
   // }
-
+  // console.log(params)
   const sendToMyTicket = () => {
     // kirim data ticket ke redux dan pindah page ke home
     history.push('/')
   }
+
+  useEffect(() => {
+    dispatch(fetchEventById(params.id))
+    dispatch(fetchEvents(detailEvent.id))
+  }, [])
+  console.log(detailEvent, 'detailEvent')
 
   if (!props.ticket) {
     return <h1>Loading ...</h1>
@@ -34,7 +58,7 @@ export default function CardEventDetail(props) {
 
   return (
     <Container fluid>
-      {/* <div>{JSON.stringify(props.ticket)}</div> */}
+      <div>{JSON.stringify(props.ticket)}</div>
       {/* <Button
         onClick={goHistory}
         style={{
@@ -104,11 +128,35 @@ export default function CardEventDetail(props) {
                     <div></div> :
                     <Form.Group controlId='formGroupName'>
                       <Form.Label><strong>Ticket Class</strong></Form.Label>
-                      <Form.Control as="select" defaultValue="Choose...">
+                      <Form.Control as="select" onChange={e => {
+                        setSelected(e.target.value)
+                        dispatch(updateCapacity({
+                          id: detailEvent.id,
+                          value: detailEvent.capacity_regular
+                        }))
+                      }} defaultValue="Choose...">
                         <option> - Choose Ticket - </option>
-                        <option>{'Reguler'}:  {regTicket}</option>
-                        <option>{'VIP'}:  {vipTicket}</option>
-                        <option>{'WIP Ticket'}:  {wipTicket}</option>
+                        {console.log(detailEvent.capacity_regular, '<<<<< option')}
+                        {
+                          detailEvent.capacity_regular ? <option value='1'>Regular: {detailEvent.price_regular}</option> : ''
+                        }
+                        {
+                          detailEvent.capacity_vip ? <option value='2' >VIP: {detailEvent.price_vip}</option> : ''
+                        }
+                        {
+                          detailEvent.capacity_vvip ? <option value='3'>VVIP: {detailEvent.price_vvip}</option> : ''
+                        }
+                        {
+                          // newEvents.map(event => {
+                          // return (
+                          // <option onSelect={(id) => dispatch(updateCapacity({
+                          //   id: .id,
+                          //   value: id.capacity_regular - 1,
+                          // }))}>Regular</option>
+                          //   )
+                          // })
+                        }
+
                       </Form.Control>
                     </Form.Group>
                   }
@@ -118,9 +166,21 @@ export default function CardEventDetail(props) {
                   }
                   <br />
                 </Form>
+                {/* {
+                  newEvents.map(event => {
+                    return (
+                      <>
+                        <option onSelect={(id) => dispatch(updateCapacity({
+                          id: event.id,
+                          value: event.capacity_regular - 1,
+                        }))}>Regular</option>
+                      </>
+                    )
+                  })
+                } */}
                 {(statusTicket === 'unpaid') ?
                   <Button
-                    // onClick={handleShow}
+                    onClick={handleShow}
                     type='submit'
                     style={{
                       marginRight: 5,

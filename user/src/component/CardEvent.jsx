@@ -3,6 +3,8 @@ import { Container, Card, Button, Row, Col } from 'react-bootstrap'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addWishlist, removeWishlist } from '../store/action/wishlistAction'
+import { updateCapacity, fetchEvents } from "../store/action/eventAction" 
+
 
 export default function CardEvent(props) {
   const wishlists = useSelector(state => state.wishlistReducer.wishlistEvent)
@@ -12,6 +14,8 @@ export default function CardEvent(props) {
   const [showButton, setShowButton] = useState(true)
   const [local, setLocal] = useState(localStorage.getItem('access_token'))
   const temp = useSelector(state => state.userReducer.local)
+  const newEvents = useSelector(state => state.eventReducer.newEvents)
+
 
   useEffect(() => {
     setLocal(localStorage.getItem('access_token'))
@@ -33,6 +37,7 @@ export default function CardEvent(props) {
   }, [wishlists])
 
   function goDetail(id) {
+    alert(id)
     history.push(`/event/${id}`)
   }
 
@@ -50,6 +55,7 @@ export default function CardEvent(props) {
 
   return (
       <Col lg={6}>
+      {JSON.stringify(newEvents)}
         <Card style={{ flexDirection: 'row', margin: 10, width: '600px', height: 145 }}>
           <Card.Img style={{ width: '125px' }} src={props.data.event_preview} />
           <Card.Body style={{width: 500}}>

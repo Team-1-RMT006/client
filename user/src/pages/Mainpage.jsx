@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, CardDeck, Carousel } from 'react-bootstrap'
 import CardEvent from '../component/CardEvent'
 import FooterPage from '../component/FooterPage'
+import LandingPageHeader from '../component/LandingPageHeader'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchEvent } from '../store/action/eventAction'
 import { fetchWishlist } from '../store/action/wishlistAction'
@@ -29,6 +30,8 @@ export default function Mainpage() {
   }
   return (
     <Container fluid>
+      {JSON.stringify(events)}
+      <LandingPageHeader />
       <Container>
         <Carousel>
           {banner.map(el => {

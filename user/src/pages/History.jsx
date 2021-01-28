@@ -10,9 +10,9 @@ export default function History() {
   const tickets = useSelector(state => state.ticketReducer.tickets);
   const ticketsIsLoading = useSelector(state => state.ticketReducer.ticketsIsLoading);
   const ticketsError = useSelector(state => state.ticketReducer.ticketsError);
+  const newEvents = useSelector(state => state.eventReducer.newEvents)
 
   const dispatch = useDispatch()
-
   useEffect(() => {
     dispatch(fetchTickets())
   }, [])
@@ -22,6 +22,7 @@ export default function History() {
   }
 
   return (
+    
     <Container fluid>
       <div style={{ width: '1280px', height: '500px', backgroundColor: '#FFF5D5', alignItems: 'center', borderRadius: '5px', margin: '20px auto' }}>
         <div inline style={{ padding: '17px 35px' }}>
