@@ -1,5 +1,6 @@
 import axios from 'axios'
-const url = 'http://localhost:3000/admin/banner'
+// const url = 'http://localhost:3000/admin/banner'
+const url = `https://creativent-app.herokuapp.com/admin/banner`
 
 export const showBanner = () => {
   return (dispatch, getState) => {
