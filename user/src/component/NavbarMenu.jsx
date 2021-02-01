@@ -37,7 +37,7 @@ export default function NavbarMenu() {
         {local &&
           (
             <Nav className='mr-auto' style={{padding: '5px 0px'}}>
-              <NavLink to='/wishlist' className='mr-sm-2 h6'>Wishlist</NavLink>
+              {/* <NavLink to='/wishlist' className='mr-sm-2 h6'>Wishlist</NavLink> */}
               <NavLink to='/history' className='mr-sm-2 h6'>My Tickets</NavLink>
             </Nav>
           )}

@@ -10,31 +10,39 @@ export default function CardEvent(props) {
   const history = useHistory()
   const location = useLocation()
   const dispatch = useDispatch()
+  const pic = useSelector(state => state.eventReducer.events)
 
   // useEffect(() => {
   //   dispatch(fetchWishlist())
   // }, [wishlists])
-
   function goDetail(id) {
     history.push(`event/${id}`)
+  }
+
+  function getData() {
+    for (let i = 0; i < pic.length; i++) {
+      // console.log(pic[i].id, props.data, 'asdadads')
+      if (pic[i].id === props.data.EventId) {
+        return pic[i]
+      }
+    }
   }
 
   function handleRemoveWishlist() {
     dispatch(removeWishlist(props.data.id))
   }
-
   return (
     <Col lg={6}>
       <Card style={{ width: '18rem', justifyContent: 'center', alignItems: 'center' }}>
-        <Card.Img variant="top" src={'https://infomedhealth.com/wp-content/uploads/2018/11/download.png'} />
+        <Card.Img src={getData().event_preview} />
         <Card.Body>
-          <div style={{justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
-            <h6 ><strong>{'Blink182 Concert'}</strong></h6>
+          <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
+            <h6 ><strong>{getData().title}</strong></h6>
             <div>
-              <span>{'2021-02-13'}</span>
+              <span>{getData().date}</span>
             </div>
             <div>
-              <span>{'19:30'}</span>
+              <span>{getData().time}</span>
             </div>
           </div>
           <hr /><br />

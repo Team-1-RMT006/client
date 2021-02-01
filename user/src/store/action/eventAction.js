@@ -4,7 +4,7 @@ export function fetchEvent() {
   return (dispatch, getState) => {
     axios({
       methods: 'GET',
-      url: 'http://localhost:3000/customer/eventactive'
+      url: 'https://creativent-app.herokuapp.com/customer/eventactive'
     })
       .then(response => {
         dispatch(setEvent(response.data))
@@ -20,7 +20,7 @@ export function fetchEvents() {
   return (dispatch, getState) => {
     axios({
       method: "GET",
-      url: "http://localhost:3000/customer/eventactive",
+      url: "https://creativent-app.herokuapp.com/customer/eventactive",
     })
       .then(data => {
         const tampData = data.data
@@ -48,7 +48,7 @@ export function fetchEventById(EventId) {
   return (dispatch, getState) => {
     // console.log(TicketId, 'ini ticketid')
     axios({
-      url: `http://localhost:3000/customer/events/${EventId}`,
+      url: `https://creativent-app.herokuapp.com/customer/events/${EventId}`,
       method: 'GET',
       headers: {
         access_token: localStorage.getItem("access_token")

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000/customer'
+const url = 'https://creativent-app.herokuapp.com/customer'
 
 export function registering(payload) {
 

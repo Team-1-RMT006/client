@@ -35,7 +35,7 @@ export function fetchTickets() {
   return (dispatch, getState) => {
     axios({
       method: 'GET',
-      url: 'http://localhost:3000/customer/ticket',
+      url: 'https://creativent-app.herokuapp.com/customer/ticket',
       headers: {
         'access_token': localStorage.getItem('access_token')
       }
@@ -62,7 +62,7 @@ export const fetchTicketById = (TicketId) => {
   return (dispatch, getState) => {
     console.log(localStorage.getItem('access_token'))
     axios({
-      url: `http://localhost:3000/customer/ticket/${TicketId}`,
+      url: `https://creativent-app.herokuapp.com/customer/ticket/${TicketId}`,
       method: 'GET',
       headers: {
         access_token: localStorage.getItem("access_token")

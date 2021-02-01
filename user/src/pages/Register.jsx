@@ -59,8 +59,8 @@ export default function Register() {
       <Row>
         <Col xs={6} md={4}>
           <img
-            src="https://www.imore.com/sites/imore.com/files/styles/small/public/field/image/2020/08/image-size-icon.jpg"
-            style={{ margin: '180px' }} />
+            src='https://i.imgur.com/MX8I8iu.jpeg'
+            style={{ margin: '180px', width: 200 }} />
         </Col>
         <Col xs={10} md={8} style={{ margin: '40px 0' }}>
           <div style={{ marginLeft: '700px', fontSize: 12 }}>

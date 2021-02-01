@@ -24,7 +24,7 @@ export default function Mainpage() {
       dispatch(fetchWishlist())
       dispatch(showBanner())
     }
-  }, [events, loading, banner])
+  }, [])
 
   if (loading) {
     return (<h1>Loading.....</h1>)

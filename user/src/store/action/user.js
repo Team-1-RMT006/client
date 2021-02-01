@@ -1,7 +1,7 @@
 import axios from 'axios'
 // import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
-const url = 'http://localhost:3000/customer'
+const url = 'https://creativent-app.herokuapp.com/customer'
 // const history = useHistory()
 
 

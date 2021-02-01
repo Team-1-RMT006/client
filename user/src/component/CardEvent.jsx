@@ -16,8 +16,7 @@ export default function CardEvent(props) {
   const [local, setLocal] = useState(localStorage.getItem('access_token'))
   const temp = useSelector(state => state.userReducer.local)
   const { path } = useRouteMatch()
-
-
+  const event = useSelector(state => state.eventReducer.events)
 
 
   useEffect(() => {
@@ -47,8 +46,8 @@ export default function CardEvent(props) {
   }
 
 
-  function handleAddWishlist() {
-    dispatch(addWishlist(props.data.id))
+  function getEventPic(id) {
+    
   }
 
   function handleRemoveWishlist() {
@@ -61,38 +60,41 @@ export default function CardEvent(props) {
 
   return (
     <Col lg={6}>
-      <Card style={{ flexDirection: 'row', margin: 10, width: '600px', height: 145 }}>
-        <Card.Img style={{ width: '125px', }} src={props.data.event_preview} />
-        <Card.Body style={{ width: 500 }}>
-          <h6><strong>{props.data.title}</strong></h6>
-          <Card.Text>
-            <p>{props.data.location}</p>
-          </Card.Text>
-          <Row>
-            <Col sm={6}>
-              <h6>{props.data.date}</h6>
-              <h6>{props.data.time}</h6>
-            </Col>
-          </Row>
-        </Card.Body>
-        <Card.Footer style={{ width: '250px' }}>
-          {local &&
-            (
-              <div>
-                <Button
-                  onClick={() => path === '/' ? goEventDetail(props.data.id) : goTicketDetail(props.data.id)}
-                  color='danger'
-                  style={{
-                    margin: '28px 0px 0px 0px',
-                    width: '180px',
-                    height: '30px',
-                    color: 'whitesmoke',
-                    border: 'none',
-                    boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
-                  }}>
-                  Detail
+      {
+        path === '/' &&
+
+        <Card style={{ flexDirection: 'row', margin: 10, width: '600px', height: 145 }}>
+          <Card.Img style={{ width: '125px', objectFit: 'cover' }} src={props.data.event_preview} />
+          <Card.Body style={{ width: 500 }}>
+            <h6><strong>{props.data.title}</strong></h6>
+            <Card.Text>
+              <p>{props.data.location?.length >= 50 ? `${props.data.location.slice(0, 50)}...` : props.data.location}</p>
+            </Card.Text>
+            <Row>
+              <Col sm={6}>
+                <h6>{props.data.date}</h6>
+                <h6>{props.data.time}</h6>
+              </Col>
+            </Row>
+          </Card.Body>
+          <Card.Footer style={{ width: '250px' }}>
+            {local &&
+              (
+                <div>
+                  <Button
+                    onClick={() => path === '/' ? goEventDetail(props.data.id) : goTicketDetail(props.data.id)}
+                    color='danger'
+                    style={{
+                      margin: '28px 0px 0px 0px',
+                      width: '180px',
+                      height: '30px',
+                      color: 'whitesmoke',
+                      border: 'none',
+                      boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
+                    }}>
+                    Detail
                   </Button>
-                { (location.pathname === '/' && showButton) ?
+                  {/* { (path === '/') &&
                   (
                     <Button
                       color='danger'
@@ -107,7 +109,7 @@ export default function CardEvent(props) {
                       }}>
                       Add Wishlist
                     </Button>
-                  ) :
+                  )
                   (
                     <Button
                       color='danger'
@@ -122,11 +124,82 @@ export default function CardEvent(props) {
                       }}>
                       Remove Wishlist
                     </Button>
-                  )}
-              </div>
-            )}
-        </Card.Footer>
-      </Card>
+                  )} */}
+                </div>
+              )}
+          </Card.Footer>
+        </Card>
+      }
+      {
+        path === '/history' &&
+
+        <Card style={{ flexDirection: 'row', margin: 10, width: '600px', height: 145 }}>
+          <Card.Img style={{ width: '125px', objectFit: 'cover' }} src={'https://cdn.discordapp.com/attachments/801794812671426574/804466570256056350/Banner1.jpg'} />
+          <Card.Body style={{ width: 500 }}>
+            <h6><strong>{props.data.title}</strong></h6>
+            <Card.Text>
+              <p>{props.data.location?.length >= 50 ? `${props.data.location.slice(0, 50)}...` : props.data.location}</p>
+            </Card.Text>
+            <Row>
+              <Col sm={6}>
+                <h6>{props.data.date}</h6>
+                <h6>{props.data.time}</h6>
+              </Col>
+            </Row>
+          </Card.Body>
+          <Card.Footer style={{ width: '250px' }}>
+            {local &&
+              (
+                <div>
+                  <Button
+                    onClick={() => path === '/' ? goEventDetail(props.data.id) : goTicketDetail(props.data.id)}
+                    color='danger'
+                    style={{
+                      margin: '28px 0px 0px 0px',
+                      width: '180px',
+                      height: '30px',
+                      color: 'whitesmoke',
+                      border: 'none',
+                      boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
+                    }}>
+                    Detail
+                  </Button>
+                  {/* { (path === '/') &&
+                  (
+                    <Button
+                      color='danger'
+                      onClick={handleAddWishlist}
+                      style={{
+                        margin: '8px 0px 12px 0px',
+                        width: '180px',
+                        height: '30px',
+                        color: 'whitesmoke',
+                        border: 'none',
+                        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
+                      }}>
+                      Add Wishlist
+                    </Button>
+                  )
+                  (
+                    <Button
+                      color='danger'
+                      onClick={handleRemoveWishlist}
+                      style={{
+                        margin: '8px 0px 12px 0px',
+                        width: '180px',
+                        height: '30px',
+                        color: 'whitesmoke',
+                        border: 'none',
+                        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
+                      }}>
+                      Remove Wishlist
+                    </Button>
+                  )} */}
+                </div>
+              )}
+          </Card.Footer>
+        </Card>
+      }
     </Col>
   )
 }

@@ -35,9 +35,9 @@ export default function App() {
         <Route path='/history'>
           <History />
         </Route>
-        <Route path='/wishlist'>
+        {/* <Route path='/wishlist'>
           <Wishlist />
-        </Route>
+        </Route> */}
       </Switch>
     </Provider>
   )

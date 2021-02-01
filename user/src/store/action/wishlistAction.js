@@ -4,7 +4,7 @@ export function addWishlist(id) {
   return (dispatch, getState) => {
     axios({
       method: 'POST',
-      url: 'http://localhost:3000/customer/wishlist',
+      url: 'https://creativent-app.herokuapp.com/customer/wishlist',
       headers: {
         'access_token': localStorage.getItem('access_token')
       },
@@ -25,7 +25,7 @@ export function removeWishlist(id) {
   return (dispatch, getState) => {
     axios({
       method: 'DELETE',
-      url: `http://localhost:3000/customer/wishlist/${id}`,
+      url: `https://creativent-app.herokuapp.com/customer/wishlist/${id}`,
       headers: {
         'access_token': localStorage.getItem('access_token')
       }
@@ -51,7 +51,7 @@ export function fetchWishlist() {
   return (dispatch, getState) => {
     axios({
       method: 'GET',
-      url: 'http://localhost:3000/customer/wishlist',
+      url: 'https://creativent-app.herokuapp.com/customer/wishlist',
       headers: {
         'access_token': localStorage.getItem('access_token')
       }

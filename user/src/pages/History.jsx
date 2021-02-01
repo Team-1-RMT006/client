@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchTickets } from '../store/action/ticketAction'
 
 
-export default function History() {
+export default function History(props) {
   const tickets = useSelector(state => state.ticketReducer.tickets);
   const ticketsIsLoading = useSelector(state => state.ticketReducer.ticketsIsLoading);
   const ticketsError = useSelector(state => state.ticketReducer.ticketsError);
@@ -16,21 +16,18 @@ export default function History() {
   useEffect(() => {
     dispatch(fetchTickets())
   }, [])
-
+  console.log(props,'<<<<< aowkaoowkoakw')
   if (ticketsIsLoading) {
     return <h1>Loading ... </h1>
   }
-
+  console.log(tickets)
   return (
-    
+
     <Container fluid>
       <div style={{ width: '1280px', backgroundColor: '#FFF5D5', alignItems: 'center', borderRadius: '5px', margin: '20px auto' }}>
         <div inline style={{ padding: '17px 35px' }}>
           <h1><strong>Tickets</strong></h1>
           <hr /><br />
-          <Form className='mr-auto'>
-            <Form.Control style={{ width: '500px' }} type="text" placeholder="Search" />
-          </Form>
         </div>
         <Row>
           <CardDeck style={{ margin: '0px 17px' }}>
