@@ -35,7 +35,7 @@ function Register ({loggedIn}) {
   function handleRegister () {
     axios({
       method: "POST",
-      url: "http://localhost:3000/organizers/register",
+      url: "https://creativent-app.herokuapp.com/organizers/register",
       data: {
         name: inputUser.name,  
         email: inputUser.email,   
@@ -62,7 +62,7 @@ function Register ({loggedIn}) {
       <div className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style={{maxWidth: 1000}}>
         <div className="md:flex w-full">
           <div className="hidden md:block w-1/2 bg-indigo-500">
-            <img className="w-full h-full" src="https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/8/shutterstock_199419065.jpg" alt="img"></img>
+            <img className="w-full h-full" src="https://images.creativemarket.com/0.1.0/ps/8573503/600/400/m2/fpnw/wm0/collective-virtual-video-call-1-.jpg?1592651608&s=4db87b1f3b550ac7077c6258adc5bf70" alt="img"></img>
           </div>
           <div className="w-full md:w-1/2 py-5 px-5 md:px-10">
             <div className="text-center">
@@ -80,7 +80,7 @@ function Register ({loggedIn}) {
                     <input 
                       type="text" 
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" 
-                      placeholder="John" 
+                      placeholder="Your Organization or Personal Name" 
                       onChange={(e)=>{
                         setInputUser({...inputUser, name: e.target.value})
                       }}/>
@@ -148,7 +148,7 @@ function Register ({loggedIn}) {
                     <input 
                       type="text" 
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" 
-                      placeholder="Jalan Jalan, Ke Denpasar, Cakep" 
+                      placeholder="Jl. Kenari pagi No.12" 
                       onChange={(e)=>{
                         setInputUser({...inputUser, address: e.target.value})
                       }}

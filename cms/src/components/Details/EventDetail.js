@@ -26,13 +26,13 @@ function EventDetail (){
         <>
           <div className="flex flex-row h-1/4 p-2">
             <img 
-              className="w-1/3"
+              className="w-1/4"
               src={DetailEvent?.event_preview}
               alt="bagus euy">
             </img>
-            <div className="w-1/3 h-full flex flex-col items-start justify-end">
-              <div className="text-xl text-gray-100">{DetailEvent?.Organizer?.name}</div>
-              <div className="text-5xl text-gray-100">{DetailEvent?.title}</div>
+            <div className="w-2/4 h-full flex flex-col items-start justify-end">
+              <div className="text-2xl text-gray-100 ml-3">{DetailEvent?.Organizer?.name}</div>
+              <div className="text-5xl text-gray-100 ml-2">{DetailEvent?.title}</div>
             </div>
           </div>
           <div className="flex-grow overflow-auto">
@@ -63,7 +63,7 @@ function EventDetail (){
                   </tbody>
                 </table> : 
                 <div className="flex flex-col justify-center items-center w-full h-full bg-gray-600">
-                  <i className="fas fa-circle-notch fa-spin fa-5x"></i>
+                  <i className='fas fa-user-alt text-5xl'></i>
                   <div className="text-3xl text-gray-100 font-bold">There is still no audience for this Event</div>
                 </div>
               }
