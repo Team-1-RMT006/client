@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = "http://localhost:3000/"
+const baseUrl = "https://creativent-app.herokuapp.com/"
 
 export function CreateNewEvent(payload, checked, role) {
   let postUrl = `${baseUrl}organizers/events`
@@ -84,18 +84,29 @@ export function AddNewEventType(payload) {
 
 export function DeleteEvent(id) {
   let deleteUrl = `${baseUrl}organizers/events/${id}`;
+
   if(localStorage.getItem('isAdmin') === 'true'){
     deleteUrl = `${baseUrl}admin/event/${id}`
-    
+    return axios({
+      method: "DELETE",
+      url: deleteUrl,
+      headers: {
+        access_token: localStorage.getItem('access_token')
+      }
+    })
+  } else {
+    return axios({
+      method: "PUT",
+      url: deleteUrl,
+      data: {
+        StatusId: 3
+      },
+      headers: {
+        access_token: localStorage.getItem('access_token')
+      }
+    })
   }
   console.log(deleteUrl);
-  return axios({
-    method: "DELETE",
-    url: deleteUrl,
-    headers: {
-      access_token: localStorage.getItem('access_token')
-    }
-  })
 }
 
 export function GetDetail (id) {

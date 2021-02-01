@@ -43,6 +43,7 @@ function App() {
       history.push('/login');
     }
   }, [loggedIn, history]);
+  console.log(7 + null + 2);
   return (
     <div className="app">
       <div className="flex flex-row">

@@ -30,9 +30,9 @@ function Login ({loggedIn, setLoggedIn}) {
   }
 
   function handleLogin () {
-    let loginUrl = "http://localhost:3000/organizers/login";
+    let loginUrl = "https://creativent-app.herokuapp.com/organizers/login";
     if(isAdmin){
-      loginUrl ="http://localhost:3000/admin/login"
+      loginUrl ="https://creativent-app.herokuapp.com/admin/login"
     }
     console.log(inputUser);
     axios({
@@ -60,7 +60,7 @@ function Login ({loggedIn, setLoggedIn}) {
     <div className="w-4/5 h-screen bg-gray-900 flex items-center justify-center px-5 py-5">
       <div className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style={{maxWidth: 1000}}>
         <div className="md:flex w-full">
-          <div className="w-full md:w-1/2 py-5 px-5 md:px-10">
+          <div className="w-full md:w-2/5 py-20 px-5 md:px-10">
             <div className="text-center mb-5">
                 <h1 className="font-bold text-3xl text-gray-900">Sign In</h1>
                 <p>Sign-in and start organize your event!</p>
@@ -116,7 +116,7 @@ function Login ({loggedIn, setLoggedIn}) {
                     >LOGIN</button>
                 </div>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center mt-2">
                 <input 
                   type="checkbox"
                   className="mr-1"
@@ -129,8 +129,8 @@ function Login ({loggedIn, setLoggedIn}) {
               </div>
             </div>
           </div>
-          <div className="hidden md:block w-1/2 bg-indigo-500">
-            <img className="w-full h-full" src="https://www.beat.com.au/wp-content/uploads/2019/12/IMG_4354-e1576713436663.jpg" alt="img"></img>
+          <div className="hidden md:block w-3/5 bg-indigo-500">
+            <img className="w-full h-full" src="https://i.imgur.com/MX8I8iu.jpeg" alt="img"></img>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = `http://localhost:3000/`
+const baseUrl = `https://creativent-app.herokuapp.com/`
 
 export function setBanner (payload) {
   return {
